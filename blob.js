@@ -68,13 +68,12 @@ class Blob extends Particle {
 
 		let mag = 10;
 		switch(direction) {
-			case InputEnum.UP: 
-			// console.log("up");
-			this.applyForce(createVector(0, mag));
+			case InputEnum.UP:
+			this.applyForce(createVector(0, -mag));
 			break;
 			case InputEnum.DOWN: 
 			// console.log("down");
-			this.applyForce(createVector(0, -mag));
+			this.applyForce(createVector(0, mag));
 			break;
 			case InputEnum.LEFT: 
 			// console.log("left");

@@ -1,5 +1,8 @@
 let blobs = [];
-let blobAmount = 10;
+let blobAmount = 0;
+let standardBlobSize = 20;
+
+let playerBlob;
 
 function setup() {
 	let canvas = createCanvas(
@@ -12,8 +15,11 @@ function setup() {
 	colorMode(HSB, 255, 255, 255);
 
 	for (let i=0; i<blobAmount; i++) {
-		blobs[i] = new Blob(randomGaussian(20, 0.1), color(random(255), 120, 230), false);
+		blobs[i] = new Blob(randomGaussian(standardBlobSize, 0.1), color(random(255), 120, 230), false);
 	}
+
+	playerBlob = new Blob(standardBlobSize, color(random(255), 160, 230), true);
+	blobs.push(playerBlob);
 }
 
 function draw() {
