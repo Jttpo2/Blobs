@@ -12,7 +12,7 @@ function setup() {
 	colorMode(HSB);
 
 	for (let i=0; i<blobAmount; i++) {
-		blobs[i] = new Blob(randomGaussian(20, 2), color(random(255), 50, 90));
+		blobs[i] = new Blob(randomGaussian(20, 2), color(random(255), 50, 90), false);
 	}
 }
 

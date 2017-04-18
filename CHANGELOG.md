@@ -5,6 +5,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
+### Added
+- Loosely coupled input module functionality.
+- Random direction input module.
 
 ## [0.2.0] - 2016-12-18
 ### Added
