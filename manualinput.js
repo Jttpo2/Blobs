@@ -6,30 +6,16 @@ class ManualInput extends InputModule {
 	update() {
 		if (keyIsPressed) {
 			if (keyCode == UP_ARROW) {
-				this.up();
+				this.move(InputModule.VECTOR_UP);
 			} else if (keyCode == DOWN_ARROW) {
-				this.down();
+				this.move(InputModule.VECTOR_DOWN);
 			} else if (keyCode == LEFT_ARROW) {
-				this.left();
+				this.move(InputModule.VECTOR_LEFT);
 			} else if (keyCode == RIGHT_ARROW) {
-				this.right();
+				this.move(InputModule.VECTOR_RIGHT);
+			} else {
+				console.log("No function for key: " + keyCode);
 			}
 		}
-	}
-	
+	}	
 }
-
-
-// function keyPressed() {
-// 	console.log("key pressed");
-// 	if (keyCode === UP_ARROW) {
-// 		console.log("up received from p5");
-// 		ManualInput.up();
-// 	} else if (keyCode === DOWN_ARROW) {
-// 		ManualInput.down();
-// 	} else if (keyCode === LEFT_ARROW) {
-// 		ManualInput.left();
-// 	} else if (keyCode === RIGHT_ARROW) {
-// 		ManualInput.right();
-// 	}
-// }

@@ -1,8 +1,9 @@
 let InputEnum = {
-	UP: "Up",
-	DOWN: "Down",
-	LEFT: "Left",
-	RIGHT: "Right"
+	// UP: "Up",
+	// DOWN: "Down",
+	// LEFT: "Left",
+	// RIGHT: "Right",
+	VECTOR: "Vector"
 };
 
 Object.freeze(InputEnum);

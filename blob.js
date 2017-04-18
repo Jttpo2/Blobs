@@ -61,29 +61,13 @@ class Blob extends Particle {
 	}
 
 	observerUpdate(message) {
-		this.move(message);
+		if (message.message == InputEnum.VECTOR) {
+			this.moveInDirection(message.vector);
+		}
 	}
 
-	move(direction) {
-
-		let mag = 10;
-		switch(direction) {
-			case InputEnum.UP:
-			this.applyForce(createVector(0, -mag));
-			break;
-			case InputEnum.DOWN: 
-			// console.log("down");
-			this.applyForce(createVector(0, mag));
-			break;
-			case InputEnum.LEFT: 
-			// console.log("left");
-			this.applyForce(createVector(-mag, 0));
-			break;
-			case InputEnum.RIGHT: 
-			// console.log("right");
-			this.applyForce(createVector(mag, 0));
-			break;
-			default: console.log("Received: " + direction);
-		}
+	moveInDirection(direction) {
+		let scalar = 4;
+		this.applyForce(direction.mult(scalar));
 	}
 }

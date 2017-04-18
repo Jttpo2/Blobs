@@ -4,6 +4,26 @@ class InputModule {
 		this.observers = [];
 	}
 
+	static get VECTOR_UP() {
+		return createVector(0, -1);
+	}
+
+	static get VECTOR_DOWN() {
+		return createVector(0, 1);
+	}
+
+	static get VECTOR_LEFT() {
+		 return createVector(-1, 0);
+	}
+
+	static get VECTOR_RIGHT() {
+		 return createVector(1, 0);
+	}
+
+	static get VECTOR_ZERO() {
+		 return createVector(0, 0);
+	}
+
 	update() {
 
 	}
@@ -25,19 +45,12 @@ class InputModule {
 		});
 	}
 
-	up() {
-		this.notify(InputEnum.UP);
-	}
-
-	down() {
-		this.notify(InputEnum.DOWN);
-	}
-
-	left() {
-		this.notify(InputEnum.LEFT);
-	}
-
-	right() {
-		this.notify(InputEnum.RIGHT);
+	move(vector) {
+		this.notify(
+		{
+			message: InputEnum.VECTOR, 
+			vector: vector
+		}
+		);
 	}
 }
