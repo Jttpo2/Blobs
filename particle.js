@@ -1,10 +1,10 @@
 class Particle {
 	constructor(size, particleColor) {
 		this.pos = createVector(random(width), random(height));
-		this.vel = createVector(0, 0);
+		this.vel = createVector(randomGaussian(0, 2), randomGaussian(0, 2));
 		this.acc = createVector(0, 0);
 
-		this.maxSpeed = 10;
+		this.maxSpeed = 4;
 		this.size = size;
 		this.color = particleColor;
 	}
@@ -14,14 +14,14 @@ class Particle {
 		this.vel.limit(this.maxSpeed);
 		this.pos.add(this.vel);
 		this.acc.mult(0);
-
+ 
 		this.edges();
 	}
 
 	display() {
 		noStroke();
 		fill(this.color);
-		ellipse(this.pos.x, this.pos.y, this.size, this.size);
+		ellipse(this.pos.x, this.pos.y, this.size*2);
 	}
 
 	run() {
