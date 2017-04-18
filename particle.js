@@ -5,7 +5,7 @@ class Particle {
 		this.acc = createVector(0, 0);
 
 		this.maxSpeed = 4;
-		this.size = size;
+		this.size = size; // Radius
 		this.color = particleColor;
 	}
 

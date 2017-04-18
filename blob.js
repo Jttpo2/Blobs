@@ -28,19 +28,23 @@ class Blob extends Particle {
 		if (!this.isAlive || !otherBlob.isAlive) {
 			return;	
 		}
-		this.size += otherBlob.size;
-
-		// TODO: grow by consumed blobs area (instead of radius)
-
-		// otherBlob.getEaten();
-
-		// 2 * PI * size
-		// Area
-		// PI * otherBlob.size * otherBlob.size
+		this.size = Blob.calcRadius(this.area + otherBlob.area);
 	}
 
 	die() {
 		this.isAlive = false;
+	}
+
+	get area() {
+		return this.calcArea();
+	}
+
+	calcArea() {
+		return PI * this.size * this.size;
+	}
+
+	static calcRadius(area) {
+		return sqrt(area/PI);
 	}
 
 	bounceFrom(otherBlob) {

@@ -1,5 +1,5 @@
 let blobs = [];
-let blobAmount = 5;
+let blobAmount = 10;
 
 function setup() {
 	let canvas = createCanvas(
