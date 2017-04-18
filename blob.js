@@ -7,7 +7,7 @@ class Blob extends Particle {
 		if (isManuallyControlled) {
 			this.inputModule = new ManualInput();
 		} else {
-			this.inputModule = new AIInput();	
+			this.inputModule = new PerlinInput();	
 		}
 		this.inputModule.attach(this);
 	}

@@ -9,15 +9,16 @@ function setup() {
 
 	canvas.parent('sketch-holder');
 
-	colorMode(HSB);
+	colorMode(HSB, 255, 255, 255);
 
 	for (let i=0; i<blobAmount; i++) {
-		blobs[i] = new Blob(randomGaussian(20, 2), color(random(255), 50, 90), false);
+		blobs[i] = new Blob(randomGaussian(20, 0.1), color(random(255), 120, 230), false);
 	}
 }
 
 function draw() {
-	background(200);
+	
+	background(255);
 	blobs.forEach(function(blob) {
 		blob.run();
 	});
