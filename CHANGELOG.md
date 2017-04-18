@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
 
+## ## [0.3.0] - 2016-12-18
+### Added
+- Loosely coupled input module functionality.
+- Random direction input module.
+
 ## [0.2.0] - 2016-12-18
 ### Added
 - Blobs roam with random velocity and color, the larger eating the smaller on collision.

@@ -1,5 +1,5 @@
 let blobs = [];
-let blobAmount = 5;
+let blobAmount = 10;
 
 function setup() {
 	let canvas = createCanvas(
@@ -12,7 +12,7 @@ function setup() {
 	colorMode(HSB);
 
 	for (let i=0; i<blobAmount; i++) {
-		blobs[i] = new Blob(randomGaussian(20, 2), color(random(255), 50, 90));
+		blobs[i] = new Blob(randomGaussian(20, 2), color(random(255), 50, 90), false);
 	}
 }
 
