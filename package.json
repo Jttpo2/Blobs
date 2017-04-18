@@ -1,7 +1,7 @@
 {
   "name": "Blobs",
   "version": "0.2.0",
-  "description": "Blob game",
+  "description": "Simple blob eat blob game",
   "main": "index.html",
   "scripts": {},
   "repository": {
