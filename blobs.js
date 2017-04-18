@@ -1,4 +1,5 @@
 let blobManager;
+let joystick;
 
 function setup() {
 	let canvas = createCanvas(
@@ -9,9 +10,11 @@ function setup() {
 	canvas.parent('sketch-holder');
 
 	blobManager = new BlobManager();
+	// joystick = new Joystick();
 }
 
 function draw() {
 	background(255);
 	blobManager.update();
+	// joystick.run();
 }

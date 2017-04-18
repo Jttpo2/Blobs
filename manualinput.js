@@ -1,6 +1,7 @@
 class ManualInput extends InputModule {
 	constructor() {
 		super();
+
 	}
 
 	update() {

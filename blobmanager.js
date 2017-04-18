@@ -1,5 +1,5 @@
 class BlobManager {
-	constructor() {
+	constructor(joystick) {
 		this.blobs = [];
 		this.initialBlobAmount = 4;
 		this.standardBlobSize = 20;
@@ -8,6 +8,8 @@ class BlobManager {
 
 		this.initBlobs();
 		this.initPlayerBlob();
+
+		this.joystick = joystick;
 
 		this.deadBlobs = new FIFOQueue();	
 	}
@@ -31,8 +33,8 @@ class BlobManager {
 		let vel = createVector(randomGaussian(0, 2), randomGaussian(0, 2));
 		let size = randomGaussian(this.standardBlobSize, 0.1);
 		let col = color(random(255), 120, 230);
-		let manualControl = false;
-		this.blobs.push(new Blob(size, col, pos, vel, manualControl));
+		let inputModule = new PerlinInput();
+		this.blobs.push(new Blob(size, col, pos, vel, inputModule));
 	}
 
 	initPlayerBlob() {
@@ -40,8 +42,9 @@ class BlobManager {
 		let vel = createVector(0, 0);
 		let size = this.standardBlobSize;
 		let col = color(0, 255, 70);
-		let manualControl = true;
-		this.playerBlob = new Blob(size, col, pos, vel, manualControl);
+		let inputModule = new ManualInput();
+		// inputModule.listenTo()
+		this.playerBlob = new Blob(size, col, pos, vel, inputModule);
 		this.blobs.push(this.playerBlob);	
 	}
 
@@ -81,4 +84,15 @@ class BlobManager {
 			this.blobs.splice(index, 1);
 		}
 	}
+
+	// // Joystick listener
+	// observerUpdate(message) {
+	// 	if (message.message == InputEnum.Joystick) {
+	// 		this.playerBlob.
+	// 	}
+	// }
+
+	// attachPlayerToJoystick(joystick) {
+	// 	this.playerBlob.
+	// }
 }

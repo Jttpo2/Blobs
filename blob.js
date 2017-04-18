@@ -1,14 +1,10 @@
 class Blob extends Particle {
-	constructor (size, blobColor, startingPosition, initialVelocity, isManuallyControlled) {
+	constructor (size, blobColor, startingPosition, initialVelocity, inputModule) {
 		super(size, blobColor, startingPosition, initialVelocity);
 
 		this.isAlive = true;
 
-		if (isManuallyControlled) {
-			this.inputModule = new ManualInput();
-		} else {
-			this.inputModule = new PerlinInput();	
-		}
+		this.inputModule = inputModule;
 		this.inputModule.attach(this);
 	}
 
