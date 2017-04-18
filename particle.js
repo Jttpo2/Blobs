@@ -31,8 +31,12 @@ class Particle {
 
 	applyForce(force) {
 		let f = force.copy();
-		// f.div(this.mass);
+		f.div(this.mass);
 		this.acc.add(f);
+	}
+
+	get mass() {
+		return this.size;
 	}
 
 	edges() {

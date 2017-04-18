@@ -66,7 +66,7 @@ class Blob extends Particle {
 
 	move(direction) {
 
-		let mag = 0.2;
+		let mag = 10;
 		switch(direction) {
 			case InputEnum.UP: 
 			// console.log("up");
