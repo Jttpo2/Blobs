@@ -1,7 +1,7 @@
 class Particle {
-	constructor(size, particleColor) {
-		this.pos = createVector(random(width), random(height));
-		this.vel = createVector(randomGaussian(0, 2), randomGaussian(0, 2));
+	constructor(size, particleColor, startingPosition, initialVelocity) {
+		this.pos = startingPosition;
+		this.vel = initialVelocity;
 		this.acc = createVector(0, 0);
 
 		this.maxSpeed = 2;
