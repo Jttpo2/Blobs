@@ -1,4 +1,4 @@
-class AIInput extends InputModule {
+class PerlinInput extends InputModule {
 	constructor() {
 		super();
 
@@ -42,7 +42,7 @@ class AIInput extends InputModule {
 			break;
 			case 3: this.right();
 			break;
-			default: console.log("AIInput random number unassigned");
+			default: console.log("PerlinInput random number unassigned");
 		}	
 	}
 

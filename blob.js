@@ -1,13 +1,13 @@
 class Blob extends Particle {
-	constructor (size, blobColor, isManuallyControlled) {
-		super(size, blobColor);
+	constructor (size, blobColor, startingPosition, initialVelocity, isManuallyControlled) {
+		super(size, blobColor, startingPosition, initialVelocity);
 
 		this.isAlive = true;
 
 		if (isManuallyControlled) {
 			this.inputModule = new ManualInput();
 		} else {
-			this.inputModule = new AIInput();	
+			this.inputModule = new PerlinInput();	
 		}
 		this.inputModule.attach(this);
 	}
@@ -66,15 +66,14 @@ class Blob extends Particle {
 
 	move(direction) {
 
-		let mag = 0.2;
+		let mag = 10;
 		switch(direction) {
-			case InputEnum.UP: 
-			// console.log("up");
-			this.applyForce(createVector(0, mag));
+			case InputEnum.UP:
+			this.applyForce(createVector(0, -mag));
 			break;
 			case InputEnum.DOWN: 
 			// console.log("down");
-			this.applyForce(createVector(0, -mag));
+			this.applyForce(createVector(0, mag));
 			break;
 			case InputEnum.LEFT: 
 			// console.log("left");

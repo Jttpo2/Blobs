@@ -1,10 +1,10 @@
 class Particle {
-	constructor(size, particleColor) {
-		this.pos = createVector(random(width), random(height));
-		this.vel = createVector(randomGaussian(0, 2), randomGaussian(0, 2));
+	constructor(size, particleColor, startingPosition, initialVelocity) {
+		this.pos = startingPosition;
+		this.vel = initialVelocity;
 		this.acc = createVector(0, 0);
 
-		this.maxSpeed = 4;
+		this.maxSpeed = 2;
 		this.size = size; // Radius
 		this.color = particleColor;
 	}
@@ -31,8 +31,12 @@ class Particle {
 
 	applyForce(force) {
 		let f = force.copy();
-		// f.div(this.mass);
+		f.div(this.mass);
 		this.acc.add(f);
+	}
+
+	get mass() {
+		return this.size;
 	}
 
 	edges() {
