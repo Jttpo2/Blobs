@@ -7,6 +7,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ## [Unreleased]
 ### Added
 - Blobs affected by mass. Larger ones appear more sluggish.
+- Manual input through arrow keys.
+- Player blob.
 
 ## ## [0.3.0] - 2016-12-18
 ### Added

@@ -4,7 +4,7 @@ class Particle {
 		this.vel = createVector(randomGaussian(0, 2), randomGaussian(0, 2));
 		this.acc = createVector(0, 0);
 
-		this.maxSpeed = 4;
+		this.maxSpeed = 2;
 		this.size = size; // Radius
 		this.color = particleColor;
 	}

@@ -1,5 +1,5 @@
 let blobs = [];
-let blobAmount = 0;
+let blobAmount = 4;
 let standardBlobSize = 20;
 
 let playerBlob;
@@ -18,7 +18,7 @@ function setup() {
 		blobs[i] = new Blob(randomGaussian(standardBlobSize, 0.1), color(random(255), 120, 230), false);
 	}
 
-	playerBlob = new Blob(standardBlobSize, color(random(255), 160, 230), true);
+	playerBlob = new Blob(standardBlobSize, color(0, 255, 70), true);
 	blobs.push(playerBlob);
 }
 
