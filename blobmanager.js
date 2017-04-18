@@ -7,7 +7,9 @@ class BlobManager {
 		colorMode(HSB, 255, 255, 255);
 
 		this.initBlobs();
-		this.initPlayerBlob();	
+		this.initPlayerBlob();
+
+		this.deadBlobs = new FIFOQueue();	
 	}
 
 	update() {
@@ -15,6 +17,7 @@ class BlobManager {
 			blob.run();
 		});
 		this.checkForCollisions();
+		this.deleteDeadBlobs();
 	}
 
 	initBlobs() {
@@ -43,19 +46,20 @@ class BlobManager {
 	}
 
 	checkForCollisions() {
-		let blobsHandle = this.blobs;
-		blobsHandle.forEach(function(blob) {
-			blobsHandle.forEach(function(otherBlob) {
+		let surroundingClassHandle = this;
+		this.blobs.forEach(function(blob) {
+			surroundingClassHandle.blobs.forEach(function(otherBlob) {
 				if (otherBlob == this) {
 					return;
 				}
 				if(blob.isCollidingWith(otherBlob)) {
 					if (blob.size > otherBlob.size) {
 						blob.eat(otherBlob);
-						otherBlob.die();
+						surroundingClassHandle.kill(otherBlob);
 					} else if (blob.size < otherBlob.size) {
 						otherBlob.eat(blob);
-						blob.die();
+						surroundingClassHandle.kill(blob);
+
 					} else {
 						blob.bounceFrom(otherBlob);
 						otherBlob.bounceFrom(Blob);
@@ -63,5 +67,18 @@ class BlobManager {
 				}
 			});
 		});
+	}
+
+	kill(blob) {
+		blob.die();
+		this.deadBlobs.add(blob);
+	}
+
+	deleteDeadBlobs() {
+		while (!this.deadBlobs.isEmpty()) {
+			let deadBlob = this.deadBlobs.poll();
+			let index = this.blobs.indexOf(deadBlob);
+			this.blobs.splice(index, 1);
+		}
 	}
 }
