@@ -57,7 +57,7 @@ class Blob extends Particle {
 	}
 
 	observerUpdate(message) {
-		if (message.message == InputEnum.VECTOR) {
+		if (message.message == InputEnum.MOVEMENT_VECTOR) {
 			this.moveInDirection(message.vector);
 		}
 	}

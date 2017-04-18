@@ -1,10 +1,45 @@
 class ManualInput extends InputModule {
-	constructor() {
+	constructor(joystick) {
 		super();
+		this.joystick = joystick;
+		joystick.attach(this);
 
+		this.mouseIsPressedPrev = false;
+		// this.previousTouchLength = 0;
 	}
 
 	update() {
+		let mousePos = createVector(mouseX, mouseY);
+		if (mouseIsPressed) {
+			this.joystick.feedInput(mousePos);
+			// if (!this.mouseIsPressedPrev) {
+			// Input started this update
+			// this.joystick.startInput(mousePos);
+			// } else {
+			// Input continues from previous update
+			// this.joystick.continueInput(mousePos);
+
+		} else if (this.mouseIsPressedPrev) {
+			// Input stopped since last frame
+			this.joystick.finishInput();
+		}
+
+		this.mouseIsPressedPrev = mouseIsPressed;
+
+		// Will work for touch input?
+		// if (touches.length > 0) {
+		// 	if (this.previousTouchLength <= 0) {
+		// 		// Input started this update
+		// 		this.joystick.startInput(mousePos);
+		// 	} else {
+		// 		// Input continues from previous update
+		// 		this.joystick.continueInput(mousePos);
+		// 	}
+		// } else if (this.previousTouchLength > 0) {
+		// 	// Input stopped since last frame
+		// 	this.joystick.finishInput();
+		// }
+
 		if (keyIsPressed) {
 			if (keyCode == UP_ARROW) {
 				this.move(InputModule.VECTOR_UP);
@@ -19,4 +54,10 @@ class ManualInput extends InputModule {
 			}
 		}
 	}	
+
+	observerUpdate(message) {
+		if (message.message == InputEnum.MOVEMENT_VECTOR) {
+			this.move(message.vector);
+		}
+	}
 }

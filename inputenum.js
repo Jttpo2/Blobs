@@ -3,7 +3,7 @@ let InputEnum = {
 	// DOWN: "Down",
 	// LEFT: "Left",
 	// RIGHT: "Right",
-	VECTOR: "Vector"
+	MOVEMENT_VECTOR: "Movement Vector"
 };
 
 Object.freeze(InputEnum);

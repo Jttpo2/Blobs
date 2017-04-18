@@ -9,12 +9,12 @@ function setup() {
 
 	canvas.parent('sketch-holder');
 
-	blobManager = new BlobManager();
-	// joystick = new Joystick();
+	joystick = new Joystick();
+	blobManager = new BlobManager(joystick);
 }
 
 function draw() {
 	background(255);
 	blobManager.update();
-	// joystick.run();
+	joystick.run();
 }

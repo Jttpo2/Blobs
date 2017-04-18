@@ -48,7 +48,7 @@ class InputModule {
 	move(vector) {
 		this.notify(
 		{
-			message: InputEnum.VECTOR, 
+			message: InputEnum.MOVEMENT_VECTOR, 
 			vector: vector
 		}
 		);

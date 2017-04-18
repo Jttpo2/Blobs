@@ -1,15 +1,16 @@
 class BlobManager {
 	constructor(joystick) {
 		this.blobs = [];
-		this.initialBlobAmount = 4;
+		this.initialBlobAmount = 0;
 		this.standardBlobSize = 20;
 
 		colorMode(HSB, 255, 255, 255);
+		
+		this.joystick = joystick;
 
 		this.initBlobs();
 		this.initPlayerBlob();
 
-		this.joystick = joystick;
 
 		this.deadBlobs = new FIFOQueue();	
 	}
@@ -42,7 +43,8 @@ class BlobManager {
 		let vel = createVector(0, 0);
 		let size = this.standardBlobSize;
 		let col = color(0, 255, 70);
-		let inputModule = new ManualInput();
+		let inputModule = new ManualInput(this.joystick);
+		// this.joystick.attach(this.joystick);
 		// inputModule.listenTo()
 		this.playerBlob = new Blob(size, col, pos, vel, inputModule);
 		this.blobs.push(this.playerBlob);	
