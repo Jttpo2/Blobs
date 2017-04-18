@@ -9,6 +9,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 - Blobs affected by mass. Larger ones appear more sluggish.
 - Manual input through arrow keys.
 - Player blob.
+- Erasing dead blobs from memory. 
+- Simple FIFO queue implemention.
 
 ## ## [0.3.0] - 2016-12-18
 ### Added
