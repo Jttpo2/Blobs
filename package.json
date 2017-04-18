@@ -1,19 +1,19 @@
 {
-  "name": "Empty P5 Project",
-  "version": "0.1.0",
-  "description": "Empty P5 Project with gulp, livereload and gitignore.",
+  "name": "Blobs",
+  "version": "0.2.0",
+  "description": "Blob game",
   "main": "index.html",
   "scripts": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Jttpo2/EmptyP5Project.git"
+    "url": "git+https://github.com/Jttpo2/Blobs.git"
   },
   "author": "John Petersson",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Jttpo2/EmptyP5Project/issues"
+    "url": "https://github.com/Jttpo2/Blobs/issues"
   },
-  "homepage": "https://github.com/Jttpo2/EmptyP5Project#readme",
+  "homepage": "https://github.com/Jttpo2/Blobs#readme",
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-livereload": "^3.8.1"
