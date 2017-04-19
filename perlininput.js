@@ -34,13 +34,13 @@ class PerlinInput extends InputModule {
 		rand %= TWO_PI;
 		rand = floor(rand / HALF_PI);
 		switch(rand) {
-			case 0: this.move(InputModule.VECTOR_UP);
+			case 0: this.notifyMovement(InputModule.VECTOR_UP);
 			break;
-			case 1:  this.move(InputModule.VECTOR_DOWN);
+			case 1:  this.notifyMovement(InputModule.VECTOR_DOWN);
 			break;
-			case 2:  this.move(InputModule.VECTOR_LEFT);
+			case 2:  this.notifyMovement(InputModule.VECTOR_LEFT);
 			break;
-			case 3:  this.move(InputModule.VECTOR_RIGHT);
+			case 3:  this.notifyMovement(InputModule.VECTOR_RIGHT);
 			break;
 			default: console.log("PerlinInput random number unassigned");
 		}	
