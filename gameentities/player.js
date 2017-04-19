@@ -30,6 +30,11 @@ class Player {
 				message: "Player Died"
 			});
 		}
+
+		// Hack to not spawn drones on screen
+		// if (this.isAlive) {
+			this.blobManager.doNotSpawnNear(this.pos);
+		// } 
 	}
 
 	get isAlive() {

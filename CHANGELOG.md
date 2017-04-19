@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
 ### Added
+- Respawn drones outside screen.
 
 ### Changed
 - Smaller initial blobs.

@@ -11,7 +11,7 @@ class RespawnPopup {
 		colorMode(HSB, 255, 255, 255);
 		this.textColor = RespawnPopup.getColorWithRandomHue( 
 			Constants.BLOB_SATURATION - 20, 
-			Constants.BLOB_BRIGHTNESS -20);
+			Constants.BLOB_BRIGHTNESS -110);
 		this.outlineColor = color(
 			hue(this.textColor), 
 			saturation(this.textColor) -20, 
