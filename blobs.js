@@ -7,7 +7,7 @@ let joystick;
 let player;
 let followCam;
 let gameboard;
-let gamesize = 2000;
+let gamesize = Constants.GAME_SIZE;
 let backgroundColor;
 
 let respawnPopup;
