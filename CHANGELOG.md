@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
+### Added
+
+### Changed
+- Smaller initial blobs.
 
 ## [0.7.0] - 2016-12-19
 ### Added

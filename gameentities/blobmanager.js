@@ -3,8 +3,8 @@ class BlobManager {
 		this.gameboard = gameboard;
 
 		this.blobs = [];
-		this.initialBlobAmount = 30;
-		this.standardBlobSize = 20;
+		this.initialBlobAmount = 50;
+		this.standardBlobSize = 10;
 
 		colorMode(HSB, 255, 255, 255);
 		this.playerBlobColor = Constants.PLAYER_BLOB_COLOR;
