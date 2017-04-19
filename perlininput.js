@@ -4,7 +4,7 @@ class PerlinInput extends InputModule {
 
 		this.perlinSetup();
 
-		this.cycleTime = 0.1*1000;
+		this.cycleTime = 0.05*1000;
 		this.startTimer();
 	}
 
@@ -34,13 +34,13 @@ class PerlinInput extends InputModule {
 		rand %= TWO_PI;
 		rand = floor(rand / HALF_PI);
 		switch(rand) {
-			case 0: this.up();
+			case 0: this.move(InputModule.VECTOR_UP);
 			break;
-			case 1: this.down();
+			case 1:  this.move(InputModule.VECTOR_DOWN);
 			break;
-			case 2: this.left();
+			case 2:  this.move(InputModule.VECTOR_LEFT);
 			break;
-			case 3: this.right();
+			case 3:  this.move(InputModule.VECTOR_RIGHT);
 			break;
 			default: console.log("PerlinInput random number unassigned");
 		}	
