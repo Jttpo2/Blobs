@@ -13,6 +13,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 - Respawn player on space key down.
 - Respawning on site of demise rather than in center of gameboard.
 - Replace dead blobs.
+- Constants class.
+- Show respawn popup on demise.
 
 ## [0.6.0] - 2016-12-19
 ### Added

@@ -7,7 +7,7 @@ class BlobManager {
 		this.standardBlobSize = 20;
 
 		colorMode(HSB, 255, 255, 255);
-		this.playerBlobColor = color(1, 255, 170);
+		this.playerBlobColor = Constants.PLAYER_BLOB_COLOR;
 
 		this.initBlobs();
 
@@ -42,7 +42,10 @@ class BlobManager {
 			randomGaussian(0, 2));
 		let size = randomGaussian(
 			this.standardBlobSize, 0.1);
-		let col = color(random(255), 120, 230);
+		let col = color(
+			random(255), 
+			Constants.BLOB_SATURATION, 
+			Constants.BLOB_BRIGHTNESS);
 		let inputModule = new PerlinInput();
 		let isManual = false;
 		let blob = new Blob(

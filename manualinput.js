@@ -9,6 +9,7 @@ class ManualInput extends InputModule {
 		this.prevKey = null;
 
 		this.spawnKey = ' ';
+		this.killKey = 'k';
 	}
 
 	update() {
@@ -53,7 +54,11 @@ class ManualInput extends InputModule {
 			} else if (this.prevKey == this.spawnKey && key == this.spawnkey) {
 				// Do nothing on prolonged presses on same key.
 				// TODO: Doesn't work
-			}
+			} else if (key == this.killKey && this.prevKey != this.killKey) {
+				this.notify({
+					message: "Kill Player"
+				});
+			} 
 
 			// Legacy keyboard input
 			else if (keyCode == UP_ARROW) {

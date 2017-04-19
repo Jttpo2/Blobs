@@ -7,6 +7,8 @@ let gameboard;
 let gamesize = 2000;
 let backgroundColor;
 
+let respawnPopup;
+
 function setup() {
 	let canvas = createCanvas(
 		window.innerWidth * 5/7,
@@ -26,6 +28,9 @@ function setup() {
 	player = new Player(playerStartPos, blobManager, manualInput);
 	followCam = new FollowCam(gameboard, blobManager.allBlobs);
 	followCam.follow(player);
+
+	respawnPopup = new RespawnPopup();
+	player.attach(respawnPopup);
 }
 
 function draw() {
@@ -36,4 +41,5 @@ function draw() {
 	manualInput.update();
 	followCam.update();
 	joystick.run();
+	respawnPopup.run();
 }

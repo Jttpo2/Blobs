@@ -44,7 +44,8 @@ class InputModule {
 			if(observer.observerUpdate) {
 				observer.observerUpdate(message);
 			} else {
-				console.log("Observer " + observer.constructor.name + " does not have observerUpdate(message) function");
+				console.log(
+					"Observer " + observer.constructor.name + " does not have observerUpdate(message) function");
 			}
 		});
 	}
