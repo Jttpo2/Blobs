@@ -5,6 +5,8 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
+
+## [0.5.0] - 2016-12-19
 ### Added
 - Visual joystick handling directional input on mouse down.
 
@@ -13,7 +15,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 - Player blob and joystick more visually distinct.
 
 
-## ## [0.4.0] - 2016-12-18
+## [0.4.0] - 2016-12-18
 ### Added
 - Blobs affected by mass. Larger ones appear more sluggish.
 - Manual input through arrow keys.
@@ -21,7 +23,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 - Erasing dead blobs from memory. 
 - Simple FIFO queue implemention.
 
-## ## [0.3.0] - 2016-12-18
+## [0.3.0] - 2016-12-18
 ### Added
 - Loosely coupled input module functionality.
 - Random direction input module.
