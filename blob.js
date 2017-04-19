@@ -23,15 +23,15 @@ class Blob extends Particle {
 				// Distinguish player blob by
 				// border 
 				noFill();
-				stroke(
-					color(
-						hue(this.color), 
-						saturation(this.color), 
-						brightness(this.color) + 25));
-				ellipse(
-					this.pos.x, 
-					this.pos.y, 
-					this.size * 2);
+				// stroke(
+				// 	color(
+				// 		hue(this.color), 
+				// 		saturation(this.color), 
+				// 		brightness(this.color) + 25));
+				// ellipse(
+				// 	this.pos.x, 
+				// 	this.pos.y, 
+				// 	this.size * 2);
 
 				// center spot
 				noStroke();
