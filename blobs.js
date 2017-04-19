@@ -4,7 +4,10 @@ let joystick;
 let player;
 let followCam;
 let gameboard;
-let gamesize = 1000;
+let gamesize = 2000;
+let backgroundColor;
+
+let respawnPopup;
 
 function setup() {
 	let canvas = createCanvas(
@@ -16,20 +19,27 @@ function setup() {
 
 	canvas.parent('sketch-holder');
 
-	gameboard = new Gameboard(gamesize, gamesize);
+	backgroundColor = color(50);
+	gameboard = new Gameboard(gamesize, gamesize, backgroundColor);
 	joystick = new Joystick();
 	manualInput = new ManualInput(joystick);
 	blobManager = new BlobManager(gameboard);
-	player = new Player(blobManager, manualInput);
-	followCam = new FollowCam(blobManager);
+	let playerStartPos = createVector(gameboard.width/2, gameboard.height/2);
+	player = new Player(playerStartPos, blobManager, manualInput);
+	followCam = new FollowCam(gameboard, blobManager.allBlobs);
 	followCam.follow(player);
+
+	respawnPopup = new RespawnPopup();
+	player.attach(respawnPopup);
 }
 
 function draw() {
-	background(50);
+	// background(50);
+	// gameboard.display();
 	player.update();
 	blobManager.update();
 	manualInput.update();
-	joystick.run();
 	followCam.update();
+	joystick.run();
+	respawnPopup.run();
 }

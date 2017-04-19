@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [0.7.0] - 2016-12-19
+### Added
+- Smoothfollow camera.
+- Camera chasing faster with distance.
+- Drawing gameboard edges.
+- Area outside gameboard filled.
+- Respawn player on space key down.
+- Respawning on site of demise rather than in center of gameboard.
+- Replace dead blobs.
+- Constants class.
+- Show respawn popup on demise.
+
 ## [0.6.0] - 2016-12-19
 ### Added
 - Gameboard larger than window.
