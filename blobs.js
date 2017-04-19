@@ -1,3 +1,6 @@
+let canvasToWindowWidthRatio = 5/7;
+let canvasToWindowHeightRatio = 5/7;
+
 let blobManager;
 let manualInput;
 let joystick;
@@ -15,8 +18,8 @@ function preload() {
 
 function setup() {
 	let canvas = createCanvas(
-		window.innerWidth * 5/7,
-		window.innerHeight * 5/7
+		window.innerWidth * canvasToWindowWidthRatio,
+		window.innerHeight * canvasToWindowHeightRatio
 		);
 
 	// frameRate(1);
@@ -45,3 +48,15 @@ function draw() {
 	joystick.run();
 	respawnPopup.run();
 }
+
+function windowResized() {
+	resizeCanvas(
+		window.innerWidth * canvasToWindowWidthRatio,
+		window.innerHeight * canvasToWindowHeightRatio);
+	onResize();
+}
+
+function onResize() {
+	respawnPopup.reposition();
+}
+
