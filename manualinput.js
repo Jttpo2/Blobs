@@ -1,8 +1,8 @@
 class ManualInput extends InputModule {
 	constructor(joystick) {
 		super();
-		this.joystick = joystick;
 		joystick.attach(this);
+		this.joystick = joystick;
 
 		this.mouseIsPressedPrev = false;
 		this.keyIsPressedPrev = null;
@@ -19,7 +19,7 @@ class ManualInput extends InputModule {
 
 		this.mouseIsPressedPrev = mouseIsPressed;
 
-		// Will work for touch input?
+		// Might work for touch input?
 		// if (touches.length > 0) {
 		// 	if (this.previousTouchLength <= 0) {
 		// 		// Input started this update
@@ -34,6 +34,7 @@ class ManualInput extends InputModule {
 		// }
 
 
+		// Legacy keyboard input
 		if (keyIsPressed) {
 			if (keyCode == UP_ARROW) {
 				this.move(InputModule.VECTOR_UP);

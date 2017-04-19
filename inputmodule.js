@@ -13,15 +13,15 @@ class InputModule {
 	}
 
 	static get VECTOR_LEFT() {
-		 return createVector(-1, 0);
+		return createVector(-1, 0);
 	}
 
 	static get VECTOR_RIGHT() {
-		 return createVector(1, 0);
+		return createVector(1, 0);
 	}
 
 	static get VECTOR_ZERO() {
-		 return createVector(0, 0);
+		return createVector(0, 0);
 	}
 
 	update() {

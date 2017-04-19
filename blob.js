@@ -1,20 +1,50 @@
 class Blob extends Particle {
-	constructor (size, blobColor, startingPosition, initialVelocity) {
+	constructor (size, blobColor, startingPosition, initialVelocity, isManual) {
 		super(size, blobColor, startingPosition, initialVelocity);
 
+		this.isManual = isManual;
 		this.isAlive = true;
 	}
 
 	update() {
 		if (this.isAlive) {
 			super.update();
-			this.inputModule.update();
+			
+			if (!this.isManual) {
+				this.inputModule.update();
+			}
 		}
 	}
 
 	display() {
 		if (this.isAlive) {
 			super.display();
+			if (this.isManual) {
+				// Distinguish player blob by
+				// border 
+				noFill();
+				stroke(
+					color(
+						hue(this.color), 
+						saturation(this.color), 
+						brightness(this.color) + 25));
+				ellipse(
+					this.pos.x, 
+					this.pos.y, 
+					this.size * 2);
+
+				// center spot
+				noStroke();
+				fill(
+					color(
+						hue(this.color), 
+						saturation(this.color), 
+						brightness(this.color) - 100));
+				ellipse(
+					this.pos.x, 
+					this.pos.y, 
+					this.size * (5/6));
+			}
 		}
 	}
 

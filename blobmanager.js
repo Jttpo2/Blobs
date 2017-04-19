@@ -1,15 +1,13 @@
 class BlobManager {
-	constructor(joystick) {
+	constructor() {
 		this.blobs = [];
 		this.initialBlobAmount = 6;
 		this.standardBlobSize = 20;
 
 		colorMode(HSB, 255, 255, 255);
-		
-		this.joystick = joystick;
+		this.playerBlobColor = color(0, 255, 170);
 
 		this.initBlobs();
-		this.initPlayerBlob();
 
 		this.deadBlobs = new FIFOQueue();	
 	}
@@ -34,7 +32,8 @@ class BlobManager {
 		let size = randomGaussian(this.standardBlobSize, 0.1);
 		let col = color(random(255), 120, 230);
 		let inputModule = new PerlinInput();
-		let blob = new Blob(size, col, pos, vel);
+		let isManual = false;
+		let blob = new Blob(size, col, pos, vel, isManual);
 		blob.setInputModule(inputModule);
 		this.blobs.push(blob);
 	}
@@ -43,11 +42,8 @@ class BlobManager {
 		let pos = createVector(width/2, height/2);
 		let vel = createVector(0, 0);
 		let size = this.standardBlobSize;
-		let col = color(0, 255, 70);
-		// let inputModule = new ManualInput(this.joystick);
-		// this.joystick.attach(this.joystick);
-		// inputModule.listenTo()
-		this.playerBlob = new Blob(size, col, pos, vel);
+		let isManual = true;
+		this.playerBlob = new Blob(size, this.playerBlobColor, pos, vel, isManual);
 		this.blobs.push(this.playerBlob);
 		return this.playerBlob;
 	}

@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Added
 - Visual joystick handling directional input on mouse down.
 
+### Changed
+- Input system refactoring.s
+- Player blob and joystick more visually distinct.
+
 
 ## ## [0.4.0] - 2016-12-18
 ### Added

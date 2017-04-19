@@ -1,13 +1,18 @@
 class Player {
-	constructor(blobManager, joystick) {
+	constructor(blobManager, inputModule) {
 		this.blobManager = blobManager;
-		this.joystick = joystick;
+		this.inputModule = inputModule;
 
+		this.blob = null;
 		this.spawnPlayer();
 	}
 
 	spawnPlayer() {
 		this.blob = blobManager.initPlayerBlob();
-		this.blob.setInputModule(new ManualInput(this.joystick));
+		this.blob.setInputModule(this.inputModule);
+	}
+
+	update() {
+
 	}
 }

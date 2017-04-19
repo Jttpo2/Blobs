@@ -1,4 +1,5 @@
 let blobManager;
+let manualInput;
 let joystick;
 let player;
 
@@ -11,12 +12,15 @@ function setup() {
 	canvas.parent('sketch-holder');
 
 	joystick = new Joystick();
-	blobManager = new BlobManager(joystick);
-	player = new Player(blobManager, joystick);
+	manualInput = new ManualInput(joystick);
+	blobManager = new BlobManager();
+	player = new Player(blobManager, manualInput);
 }
 
 function draw() {
-	background(255);
+	background(50);
+	player.update();
 	blobManager.update();
+	manualInput.update();
 	joystick.run();
 }

@@ -2,6 +2,11 @@ class Joystick {
 	constructor() {
 		colorMode(HSB, 255, 255, 255);
 		this.color = color(134, 200, 100);
+		this.borderColor =
+		color(
+			hue(this.color), 
+			saturation(this.color), 
+			brightness(this.color) + 25);
 		this.thumbColor = color(134, 200, 20);
 		
 		this.decidingDimension = min(width, height);
@@ -37,28 +42,15 @@ class Joystick {
 	}
 
 	display() {
+		stroke(this.borderColor);
 		fill(this.color);
 		ellipse(this.pos.x, this.pos.y, this.radius * 2);
 
+		noStroke();
 		// Thumb
 		fill(this.thumbColor);
 		ellipse(this.thumbPos.x, this.thumbPos.y, this.thumbSize);
 	}
-
-	// startInput(pos) {
-	// 	if (!this.isSteering && this.isWithinJoystick(pos)) {
-	// 		this.isSteering = true;
-	// 		this.feedInput(pos);
-	// 	}
-	// }
-
-	// continueInput(pos) {
-	// 	if (this.isSteering) {
-	// 		this.feedInput(pos);
-
-	// 	}
-	// }
-
 
 	feedInput(pos) {
 		if (!this.isSteering && this.isWithinJoystick(pos)) {
@@ -80,7 +72,6 @@ class Joystick {
 		
 		// Scale down this strong vector
 		movementVector.mult(this.movementScalar);
-
 
 		this.notify({
 			message: InputEnum.MOVEMENT_VECTOR,
@@ -113,7 +104,4 @@ class Joystick {
 			observer.observerUpdate(message);
 		});
 	}
-
-
-
 }
