@@ -1,5 +1,6 @@
 let blobManager;
 let joystick;
+let player;
 
 function setup() {
 	let canvas = createCanvas(
@@ -11,6 +12,7 @@ function setup() {
 
 	joystick = new Joystick();
 	blobManager = new BlobManager(joystick);
+	player = new Player(blobManager, joystick);
 }
 
 function draw() {

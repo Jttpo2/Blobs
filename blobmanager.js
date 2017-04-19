@@ -1,7 +1,7 @@
 class BlobManager {
 	constructor(joystick) {
 		this.blobs = [];
-		this.initialBlobAmount = 0;
+		this.initialBlobAmount = 6;
 		this.standardBlobSize = 20;
 
 		colorMode(HSB, 255, 255, 255);
@@ -34,7 +34,9 @@ class BlobManager {
 		let size = randomGaussian(this.standardBlobSize, 0.1);
 		let col = color(random(255), 120, 230);
 		let inputModule = new PerlinInput();
-		this.blobs.push(new Blob(size, col, pos, vel, inputModule));
+		let blob = new Blob(size, col, pos, vel);
+		blob.setInputModule(inputModule);
+		this.blobs.push(blob);
 	}
 
 	initPlayerBlob() {
@@ -42,11 +44,12 @@ class BlobManager {
 		let vel = createVector(0, 0);
 		let size = this.standardBlobSize;
 		let col = color(0, 255, 70);
-		let inputModule = new ManualInput(this.joystick);
+		// let inputModule = new ManualInput(this.joystick);
 		// this.joystick.attach(this.joystick);
 		// inputModule.listenTo()
-		this.playerBlob = new Blob(size, col, pos, vel, inputModule);
-		this.blobs.push(this.playerBlob);	
+		this.playerBlob = new Blob(size, col, pos, vel);
+		this.blobs.push(this.playerBlob);
+		return this.playerBlob;
 	}
 
 	checkForCollisions() {

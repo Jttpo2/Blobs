@@ -1,11 +1,8 @@
 class Blob extends Particle {
-	constructor (size, blobColor, startingPosition, initialVelocity, inputModule) {
+	constructor (size, blobColor, startingPosition, initialVelocity) {
 		super(size, blobColor, startingPosition, initialVelocity);
 
 		this.isAlive = true;
-
-		this.inputModule = inputModule;
-		this.inputModule.attach(this);
 	}
 
 	update() {
@@ -65,5 +62,10 @@ class Blob extends Particle {
 	moveInDirection(direction) {
 		let scalar = 4;
 		this.applyForce(direction.mult(scalar));
+	}
+
+	setInputModule(inputModule) {
+		inputModule.attach(this);
+		this.inputModule = inputModule;
 	}
 }
