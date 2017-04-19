@@ -5,6 +5,8 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
+
+## [0.7.0] - 2016-12-19
 ### Added
 - Smoothfollow camera.
 - Camera chasing faster with distance.
