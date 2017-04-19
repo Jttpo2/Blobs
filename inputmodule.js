@@ -41,11 +41,15 @@ class InputModule {
 
 	notify(message) {
 		this.observers.forEach(function(observer) {
-			observer.observerUpdate(message);
+			if(observer.observerUpdate) {
+				observer.observerUpdate(message);
+			} else {
+				console.log("Observer " + observer.constructor.name + " does not have observerUpdate(message) function");
+			}
 		});
 	}
 
-	move(vector) {
+	notifyMovement(vector) {
 		this.notify(
 		{
 			message: InputEnum.MOVEMENT_VECTOR, 

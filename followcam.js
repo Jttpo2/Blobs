@@ -69,6 +69,10 @@ class FollowCam {
 	// }
 
 	smoothFollow(entity) {
+		if (!entity.pos) {
+			console.log("FollowCam: Entity has no position to smoothfollow");
+			return;
+		}
 		let desiredPos = entity.pos;
 		let currentPos = this.lookingAtGameSpacePos;	
 		let nextPos = p5.Vector.lerp(

@@ -43,8 +43,7 @@ class BlobManager {
 		this.blobs.push(blob);
 	}
 
-	initPlayerBlob() {
-		let pos = createVector(width/2, height/2);
+	initPlayerBlob(pos) {
 		let vel = createVector(0, 0);
 		let size = this.standardBlobSize;
 		let isManual = true;
