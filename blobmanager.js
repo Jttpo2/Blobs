@@ -11,7 +11,7 @@ class BlobManager {
 
 		this.initBlobs();
 
-		this.deadBlobs = new FIFOQueue();	
+		this.deadBlobs = new FIFOQueue();
 	}
 
 	update() {
@@ -32,13 +32,25 @@ class BlobManager {
 	}
 
 	addBlob() {
-		let pos = createVector(random(this.gameboard.width), random(this.gameboard.height));
-		let vel = createVector(randomGaussian(0, 2), randomGaussian(0, 2));
-		let size = randomGaussian(this.standardBlobSize, 0.1);
+		let pos = createVector(
+			random(
+				this.gameboard.width), 
+			random(
+				this.gameboard.height));
+		let vel = createVector(
+			randomGaussian(0, 2), 
+			randomGaussian(0, 2));
+		let size = randomGaussian(
+			this.standardBlobSize, 0.1);
 		let col = color(random(255), 120, 230);
 		let inputModule = new PerlinInput();
 		let isManual = false;
-		let blob = new Blob(size, col, pos, vel, isManual);
+		let blob = new Blob(
+			size, 
+			col, 
+			pos, 
+			vel, 
+			isManual);
 		blob.setInputModule(inputModule);
 		this.blobs.push(blob);
 	}
@@ -47,7 +59,12 @@ class BlobManager {
 		let vel = createVector(0, 0);
 		let size = this.standardBlobSize;
 		let isManual = true;
-		this.playerBlob = new Blob(size, this.playerBlobColor, pos, vel, isManual);
+		this.playerBlob = new Blob(
+			size, 
+			this.playerBlobColor, 
+			pos, 
+			vel, 
+			isManual);
 		this.blobs.push(this.playerBlob);
 		return this.playerBlob;
 	}
@@ -105,6 +122,9 @@ class BlobManager {
 			let deadBlob = this.deadBlobs.poll();
 			let index = this.blobs.indexOf(deadBlob);
 			this.blobs.splice(index, 1);
+
+			// Add new for every dead one removed
+			this.addBlob();
 		}
 	}
 
