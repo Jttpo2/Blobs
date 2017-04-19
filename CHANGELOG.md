@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
+### Added
+- Visual joystick handling directional input on mouse down.
+
+### Changed
+- Input system refactoring.s
+- Player blob and joystick more visually distinct.
+
 
 ## ## [0.4.0] - 2016-12-18
 ### Added

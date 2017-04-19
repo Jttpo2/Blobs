@@ -1,27 +1,50 @@
 class Blob extends Particle {
-	constructor (size, blobColor, startingPosition, initialVelocity, isManuallyControlled) {
+	constructor (size, blobColor, startingPosition, initialVelocity, isManual) {
 		super(size, blobColor, startingPosition, initialVelocity);
 
+		this.isManual = isManual;
 		this.isAlive = true;
-
-		if (isManuallyControlled) {
-			this.inputModule = new ManualInput();
-		} else {
-			this.inputModule = new PerlinInput();	
-		}
-		this.inputModule.attach(this);
 	}
 
 	update() {
 		if (this.isAlive) {
 			super.update();
-			this.inputModule.update();
+			
+			if (!this.isManual) {
+				this.inputModule.update();
+			}
 		}
 	}
 
 	display() {
 		if (this.isAlive) {
 			super.display();
+			if (this.isManual) {
+				// Distinguish player blob by
+				// border 
+				noFill();
+				stroke(
+					color(
+						hue(this.color), 
+						saturation(this.color), 
+						brightness(this.color) + 25));
+				ellipse(
+					this.pos.x, 
+					this.pos.y, 
+					this.size * 2);
+
+				// center spot
+				noStroke();
+				fill(
+					color(
+						hue(this.color), 
+						saturation(this.color), 
+						brightness(this.color) - 100));
+				ellipse(
+					this.pos.x, 
+					this.pos.y, 
+					this.size * (5/6));
+			}
 		}
 	}
 
@@ -61,29 +84,18 @@ class Blob extends Particle {
 	}
 
 	observerUpdate(message) {
-		this.move(message);
+		if (message.message == InputEnum.MOVEMENT_VECTOR) {
+			this.moveInDirection(message.vector);
+		}
 	}
 
-	move(direction) {
+	moveInDirection(direction) {
+		let scalar = 4;
+		this.applyForce(direction.mult(scalar));
+	}
 
-		let mag = 10;
-		switch(direction) {
-			case InputEnum.UP:
-			this.applyForce(createVector(0, -mag));
-			break;
-			case InputEnum.DOWN: 
-			// console.log("down");
-			this.applyForce(createVector(0, mag));
-			break;
-			case InputEnum.LEFT: 
-			// console.log("left");
-			this.applyForce(createVector(-mag, 0));
-			break;
-			case InputEnum.RIGHT: 
-			// console.log("right");
-			this.applyForce(createVector(mag, 0));
-			break;
-			default: console.log("Received: " + direction);
-		}
+	setInputModule(inputModule) {
+		inputModule.attach(this);
+		this.inputModule = inputModule;
 	}
 }
