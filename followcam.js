@@ -6,8 +6,7 @@ class FollowCam {
 		this.gameZeroInScreenSpace = null;
 
 		this.lookingAtGameSpacePos = null;
-		// this.desiredPos = null;
-		this.movementDamping = 1;
+		this.movementDamping = 0.01;
 		this.lastFrameTime = millis();
 	}
 
@@ -19,7 +18,6 @@ class FollowCam {
 	update() {
 		if (this.followee) {
 			this.smoothFollow(this.followee);
-			// this.lookingAtGameSpacePos = this.followee.pos;
 			this.viewZeroInGameSpace = this.getViewZeroInGameSpace(this.lookingAtGameSpacePos);
 			this.gameZeroInScreenSpace = this.convertToScreenSpace(this.viewZeroInGameSpace);
 		}
@@ -69,10 +67,12 @@ class FollowCam {
 	smoothFollow(entity) {
 		let desiredPos = entity.pos;
 		let currentPos = this.lookingAtGameSpacePos;	
-		let nextPos = p5.Vector.lerp(currentPos, desiredPos, this.getSecondsSinceLastFrame() * this.movementDamping);
-		// this.lookingAtGameSpacePos = entity.pos;
+		let nextPos = p5.Vector.lerp(
+			currentPos, desiredPos, 
+			this.getSecondsSinceLastFrame() * 
+			this.movementDamping * 
+			desiredPos.dist(currentPos));
 		this.lookingAtGameSpacePos = nextPos;
-
 	}
 
 	getSecondsSinceLastFrame() {

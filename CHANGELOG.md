@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ## [Unreleased]
 ### Added
 - Smoothfollow camera.
+- Camera chasing faster with distance.
 
 ## [0.6.0] - 2016-12-19
 ### Added
