@@ -30,25 +30,19 @@ class PerlinInput extends InputModule {
 	}
 
 	createRandomInput() {
-		let rand = noise(this.xOff) * TWO_PI * 2;
-		rand %= TWO_PI;
-		rand = floor(rand / HALF_PI);
-		switch(rand) {
-			case 0: this.notifyMovement(InputModule.VECTOR_UP);
-			break;
-			case 1:  this.notifyMovement(InputModule.VECTOR_DOWN);
-			break;
-			case 2:  this.notifyMovement(InputModule.VECTOR_LEFT);
-			break;
-			case 3:  this.notifyMovement(InputModule.VECTOR_RIGHT);
-			break;
-			default: console.log("PerlinInput random number unassigned");
-		}	
+		let noiseValue = noise(this.xOff) * TWO_PI * 2;
+		let randUnitVector = p5.Vector.fromAngle(noiseValue);
+		// Since noise() produces a value between 0 and 1 
+		// we can use it to scale the vector between 0 and 
+		// (the same span as the manual joystick puts out)
+		randUnitVector.mult(noise(this.xOff + random(1000, 200000)));
+		
+		this.notifyMovement(randUnitVector);
 	}
 
 	perlinSetup() {
 		// Each instance should give off it's own random input
-		this.xOff = random(0, 100000);
+		this.xOff = random(0, 200000);
 		this.xIncrement = 0.002;
 
 		noiseDetail(4, 0.5);
