@@ -50,6 +50,9 @@ class ManualInput extends InputModule {
 		if (keyIsPressed) {
 			if (key == this.spawnKey && this.prevKey != this.spawnKey) {
 				this.notifySpawnPlayer();
+			} else if (this.prevKey == this.spawnKey && key == this.spawnkey) {
+				// Do nothing on prolonged presses on same key.
+				// TODO: Doesn't work
 			}
 
 			// Legacy keyboard input
@@ -65,7 +68,7 @@ class ManualInput extends InputModule {
 				console.log("No function for key: " + keyCode);
 			}
 
-			// To prevent long unwanted long presses
+			// To prevent long unwanted long presses.
 			this.prevKey = key;
 
 		} else  {
