@@ -41,9 +41,7 @@ class FollowCam {
 		let thisHandle = this;
 		let allBlobs = this.allBlobs;
 		allBlobs.forEach(function(rendObj) {
-			// if (thisHandle.isWithinViewFrustum(rendObj)) {
-				thisHandle.render(rendObj);
-			// }
+			thisHandle.render(rendObj);
 		});
 	}
 
@@ -59,14 +57,6 @@ class FollowCam {
 	convertToGameSpace(screenSpaceCoord) {
 		return p5.Vector.add(screenSpaceCoord, this.viewZeroInGameSpace);
 	}
-
-	// isWithinViewFrustum(object) {
-	// 	let screenSpaceCoord = this.convertToScreenSpace(object.pos);
-	// 	return screenSpaceCoord.x >= 0 && 
-	// 	screenSpaceCoord.x < width &&
-	// 	screenSpaceCoord.y >= 0 && 
-	// 	screenSpaceCoord.y < height;
-	// }
 
 	smoothFollow(entity) {
 		if (!entity.pos) {

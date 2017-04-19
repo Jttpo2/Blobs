@@ -6,19 +6,13 @@ class Player {
 		this.inputModule = inputModule;
 
 		this.blob = null;
-		// this.lastKnownBlobPos = null;
 		this.spawnPlayer(startPos);
-
-
-
-		// this.respawnPopup = new RespawnPopup();
 	}
 
 	spawnPlayer(pos) {
 		if (!this.blob || !this.blob.isAlive) {
 			this.blob = blobManager.initPlayerBlob(pos);
 			this.blob.setInputModule(this.inputModule);
-			// this.lastKnownBlobPos = this.blob.pos;
 
 			this.notify({
 				message: "Player Respawned"
@@ -36,12 +30,6 @@ class Player {
 				message: "Player Died"
 			});
 		}
-
-		// this.respawnPopup.display();
-
-		// if (this.blob && this.blob.pos) {
-		// 	this.lastKnownBlobPos = this.blob.pos.copy();
-		// }
 	}
 
 	get isAlive() {
@@ -49,11 +37,7 @@ class Player {
 	}
 
 	get pos() {
-		// if (this.blob && this.blob.pos) {
-			return this.blob.pos;
-		// } else {
-		// 	return this.lastKnownBlobPos;
-		// }
+		return this.blob.pos;
 	}
 
 	// ***** React to input from objects observed by player *************
@@ -89,6 +73,5 @@ class Player {
 			}
 		});
 	}
-
 	// *********************************************************
 }

@@ -38,8 +38,6 @@ function setup() {
 }
 
 function draw() {
-	// background(50);
-	// gameboard.display();
 	player.update();
 	blobManager.update();
 	manualInput.update();

@@ -15,11 +15,7 @@ class Blob extends Particle {
 			}
 		}
 	}
-
-	// display() {
-	// 	displayAt(this.pos);
-	// }
-
+	
 	displayAt(pos) {
 		if (this.isAlive) {
 			super.displayAt(pos);

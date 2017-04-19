@@ -86,6 +86,5 @@ class RespawnPopup {
 			random(255),
 			saturation,
 			brightness);
-			
 	}
 }
