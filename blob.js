@@ -16,11 +16,18 @@ class Blob extends Particle {
 		}
 	}
 
-	display() {
+	// display() {
+	// 	displayAt(this.pos);
+	// }
+
+	displayAt(pos) {
 		if (this.isAlive) {
-			super.display();
+			super.displayAt(pos);
 			if (this.isManual) {
 				// Distinguish player blob by
+				
+				colorMode(HSB, 255, 255, 255);
+
 				// border 
 				noFill();
 				// stroke(
@@ -29,9 +36,9 @@ class Blob extends Particle {
 				// 		saturation(this.color), 
 				// 		brightness(this.color) + 25));
 				// ellipse(
-				// 	this.pos.x, 
-				// 	this.pos.y, 
-				// 	this.size * 2);
+				// 	pos.x, 
+				// 	pos.y, 
+				// 	size * 2);
 
 				// center spot
 				noStroke();
@@ -41,8 +48,8 @@ class Blob extends Particle {
 						saturation(this.color), 
 						brightness(this.color) - 100));
 				ellipse(
-					this.pos.x, 
-					this.pos.y, 
+					pos.x, 
+					pos.y, 
 					this.size * (5/6));
 			}
 		}

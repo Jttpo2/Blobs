@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [0.6.0] - 2016-12-19
+### Added
+- Gameboard larger than window.
+- Camera follows player blob.
+
+### Changed
+- Joystick revamped.
+
 ## [0.5.0] - 2016-12-19
 ### Added
 - Visual joystick handling directional input on mouse down.
