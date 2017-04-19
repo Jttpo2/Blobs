@@ -14,8 +14,6 @@ class Particle {
 		this.vel.limit(this.maxSpeed);
 		this.pos.add(this.vel);
 		this.acc.mult(0);
-		
-		this.edges();
 	}
 
 	display() {
@@ -37,20 +35,5 @@ class Particle {
 
 	get mass() {
 		return this.size;
-	}
-
-	edges() {
-		if (this.pos.x > width) {
-			this.pos.x = 0;
-		}
-		if(this.pos.x < 0) {
-			this.pos.x = width;
-		}
-		if (this.pos.y > height) {
-			this.pos.y = 0;
-		}
-		if (this.pos.y < 0) {
-			this.pos.y = height;
-		}
 	}
 }
