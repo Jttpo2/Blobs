@@ -5,20 +5,13 @@ class ManualInput extends InputModule {
 		joystick.attach(this);
 
 		this.mouseIsPressedPrev = false;
-		// this.previousTouchLength = 0;
+		this.keyIsPressedPrev = null;
 	}
 
 	update() {
 		let mousePos = createVector(mouseX, mouseY);
 		if (mouseIsPressed) {
 			this.joystick.feedInput(mousePos);
-			// if (!this.mouseIsPressedPrev) {
-			// Input started this update
-			// this.joystick.startInput(mousePos);
-			// } else {
-			// Input continues from previous update
-			// this.joystick.continueInput(mousePos);
-
 		} else if (this.mouseIsPressedPrev) {
 			// Input stopped since last frame
 			this.joystick.finishInput();
@@ -40,9 +33,11 @@ class ManualInput extends InputModule {
 		// 	this.joystick.finishInput();
 		// }
 
+
 		if (keyIsPressed) {
 			if (keyCode == UP_ARROW) {
 				this.move(InputModule.VECTOR_UP);
+				// this.joystick.feedInput(p5.Vector.add(this.joystick.pos, p5.Vector.mult(InputModule.VECTOR_UP, this.joystick.radius) ));
 			} else if (keyCode == DOWN_ARROW) {
 				this.move(InputModule.VECTOR_DOWN);
 			} else if (keyCode == LEFT_ARROW) {
@@ -52,6 +47,8 @@ class ManualInput extends InputModule {
 			} else {
 				console.log("No function for key: " + keyCode);
 			}
+		} else if (this.keyIsPressedPrev) {
+			this.joystick.finishInput();
 		}
 	}	
 

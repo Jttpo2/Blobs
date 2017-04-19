@@ -11,7 +11,6 @@ class BlobManager {
 		this.initBlobs();
 		this.initPlayerBlob();
 
-
 		this.deadBlobs = new FIFOQueue();	
 	}
 
@@ -86,15 +85,4 @@ class BlobManager {
 			this.blobs.splice(index, 1);
 		}
 	}
-
-	// // Joystick listener
-	// observerUpdate(message) {
-	// 	if (message.message == InputEnum.Joystick) {
-	// 		this.playerBlob.
-	// 	}
-	// }
-
-	// attachPlayerToJoystick(joystick) {
-	// 	this.playerBlob.
-	// }
 }
