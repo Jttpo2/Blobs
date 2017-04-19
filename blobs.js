@@ -22,7 +22,8 @@ function setup() {
 	joystick = new Joystick();
 	manualInput = new ManualInput(joystick);
 	blobManager = new BlobManager(gameboard);
-	player = new Player(blobManager, manualInput);
+	let playerStartPos = createVector(gameboard.width/2, gameboard.height/2);
+	player = new Player(playerStartPos, blobManager, manualInput);
 	followCam = new FollowCam(gameboard, blobManager.allBlobs);
 	followCam.follow(player);
 }
