@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
+### Added
+- Gameboard larger than window.
+- Camera follows player blob.
+
+### Changed
+- Joystick revamped.
 
 ## [0.5.0] - 2016-12-19
 ### Added

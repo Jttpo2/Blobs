@@ -17,9 +17,13 @@ class Particle {
 	}
 
 	display() {
+		displayAt(this.pos);
+	}
+
+	displayAt(pos) {
 		noStroke();
 		fill(this.color);
-		ellipse(this.pos.x, this.pos.y, this.size*2);
+		ellipse(pos.x, pos.y, this.size*2);
 	}
 
 	run() {

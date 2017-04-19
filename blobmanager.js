@@ -3,11 +3,11 @@ class BlobManager {
 		this.gameboard = gameboard;
 
 		this.blobs = [];
-		this.initialBlobAmount = 6;
+		this.initialBlobAmount = 20;
 		this.standardBlobSize = 20;
 
 		colorMode(HSB, 255, 255, 255);
-		this.playerBlobColor = color(0, 255, 170);
+		this.playerBlobColor = color(1, 255, 170);
 
 		this.initBlobs();
 
@@ -17,7 +17,7 @@ class BlobManager {
 	update() {
 		let thisHandle = this;
 		this.blobs.forEach(function(blob) {
-			blob.run();
+			blob.update();
 			thisHandle.repositionOutsideGameboard(blob);
 		});
 		this.checkForCollisions();
@@ -68,6 +68,10 @@ class BlobManager {
 		}
 	}
 
+	displayThoseWithinView(topLeft, bottomRight) {
+		
+	}
+
 	checkForCollisions() {
 		let surroundingClassHandle = this;
 		this.blobs.forEach(function(blob) {
@@ -103,5 +107,9 @@ class BlobManager {
 			let index = this.blobs.indexOf(deadBlob);
 			this.blobs.splice(index, 1);
 		}
+	}
+
+	get allBlobs() {
+		return this.blobs;
 	}
 }

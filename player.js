@@ -15,4 +15,8 @@ class Player {
 	update() {
 
 	}
+
+	get pos() {
+		return this.blob.pos;
+	}
 }

@@ -7,12 +7,20 @@ class Joystick {
 			hue(this.color), 
 			saturation(this.color), 
 			brightness(this.color) + 25);
-		this.thumbColor = color(134, 200, 20);
+		this.thumbColor = color(
+			hue(this.color), 
+			saturation(this.color), 
+			brightness(this.color) - 40);
+		this.innerThumbColor  = color(
+			hue(this.color), 
+			saturation(this.color), 
+			brightness(this.color) + 80);
 		
 		this.decidingDimension = min(width, height);
 
 		this.radius = this.decidingDimension/8;
 		this.thumbSize = this.radius/1.2;
+		this.innerThumbSize = this.thumbSize * (3/4);
 		this.edgeMargin = this.radius * (7/5);
 		this.pos = createVector(
 			this.edgeMargin,
@@ -50,6 +58,10 @@ class Joystick {
 		// Thumb
 		fill(this.thumbColor);
 		ellipse(this.thumbPos.x, this.thumbPos.y, this.thumbSize);
+
+		// Inner thumb
+		fill(this.innerThumbColor);
+		ellipse(this.thumbPos.x, this.thumbPos.y, this.innerThumbSize);
 	}
 
 	feedInput(pos) {
