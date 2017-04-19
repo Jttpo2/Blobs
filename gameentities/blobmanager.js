@@ -41,7 +41,7 @@ class BlobManager {
 			randomGaussian(0, 2), 
 			randomGaussian(0, 2));
 		let size = randomGaussian(
-			this.standardBlobSize, 0.1);
+			this.standardBlobSize, 10);
 		let col = color(
 			random(255), 
 			Constants.BLOB_SATURATION, 
@@ -60,7 +60,7 @@ class BlobManager {
 
 	initPlayerBlob(pos) {
 		let vel = createVector(0, 0);
-		let size = this.standardBlobSize;
+		let size = this.standardBlobSize + 0.2;
 		let isManual = true;
 		this.playerBlob = new Blob(
 			size, 

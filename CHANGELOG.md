@@ -9,6 +9,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ### Changed
 - Smaller initial blobs.
+- Player blob slightly bigger than most drone initial size.
+- Larger span of initial drone sizes.
 
 ## [0.7.0] - 2016-12-19
 ### Added
