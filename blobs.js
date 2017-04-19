@@ -9,6 +9,10 @@ let backgroundColor;
 
 let respawnPopup;
 
+// Makes sure resources are loaded before initiatin sketch
+function preload() {
+}
+
 function setup() {
 	let canvas = createCanvas(
 		window.innerWidth * 5/7,
