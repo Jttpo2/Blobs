@@ -1,24 +1,30 @@
 class FollowCam {
 	constructor(blobManager) {
 		this.blobManager = blobManager;
-		this.lookingAtGameSpacePos = null;
 		this.followee = null;
 		this.viewZeroInGameSpace = null;
 		this.gameZeroInScreenSpace = null;
+
+		this.lookingAtGameSpacePos = null;
+		this.movementDamping = 0.01;
+		this.lastFrameTime = millis();
 	}
 
 	follow(entity) {
 		this.followee = entity;
+		this.lookingAtGameSpacePos = entity.pos;
 	}
 
 	update() {
 		if (this.followee) {
-			this.lookingAtGameSpacePos = this.followee.pos;
+			this.smoothFollow(this.followee);
 			this.viewZeroInGameSpace = this.getViewZeroInGameSpace(this.lookingAtGameSpacePos);
 			this.gameZeroInScreenSpace = this.convertToScreenSpace(this.viewZeroInGameSpace);
 		}
 
 		this.renderObjectsInView();
+
+		this.lastFrameTime = millis();
 	}
 
 	getViewZeroInGameSpace(lookingAtPos) {
@@ -56,5 +62,20 @@ class FollowCam {
 		screenSpaceCoord.x < width &&
 		screenSpaceCoord.y >= 0 && 
 		screenSpaceCoord.y < height;
-	} 
+	}
+
+	smoothFollow(entity) {
+		let desiredPos = entity.pos;
+		let currentPos = this.lookingAtGameSpacePos;	
+		let nextPos = p5.Vector.lerp(
+			currentPos, desiredPos, 
+			this.getSecondsSinceLastFrame() * 
+			this.movementDamping * 
+			desiredPos.dist(currentPos));
+		this.lookingAtGameSpacePos = nextPos;
+	}
+
+	getSecondsSinceLastFrame() {
+		return (millis() - this.lastFrameTime) / 1000;
+	}
 }
