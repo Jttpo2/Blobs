@@ -3,8 +3,8 @@ class BlobManager {
 		this.gameboard = gameboard;
 
 		this.blobs = [];
-		this.initialBlobAmount = 30;
-		this.standardBlobSize = 20;
+		this.initialBlobAmount = Constants.INITIAL_BLOB_AMOUNT;
+		this.standardBlobSize = 10;
 
 		colorMode(HSB, 255, 255, 255);
 		this.playerBlobColor = Constants.PLAYER_BLOB_COLOR;
@@ -32,16 +32,16 @@ class BlobManager {
 	}
 
 	addBlob() {
-		let pos = createVector(
-			random(
-				this.gameboard.width), 
-			random(
-				this.gameboard.height));
+		// Hack to not spawn drones on screen
+		let pos = this.getRandomSpawnPosition();
+		while (!this.isSpawnPositionOk(pos)) {
+			pos = this.getRandomSpawnPosition();
+		}
 		let vel = createVector(
 			randomGaussian(0, 2), 
 			randomGaussian(0, 2));
 		let size = randomGaussian(
-			this.standardBlobSize, 0.1);
+			this.standardBlobSize, 10);
 		let col = color(
 			random(255), 
 			Constants.BLOB_SATURATION, 
@@ -60,7 +60,7 @@ class BlobManager {
 
 	initPlayerBlob(pos) {
 		let vel = createVector(0, 0);
-		let size = this.standardBlobSize;
+		let size = this.standardBlobSize + 0.2;
 		let isManual = true;
 		this.playerBlob = new Blob(
 			size, 
@@ -105,7 +105,6 @@ class BlobManager {
 					} else if (blob.size < otherBlob.size) {
 						otherBlob.eat(blob);
 						surroundingClassHandle.kill(blob);
-
 					} else {
 						blob.bounceFrom(otherBlob);
 						otherBlob.bounceFrom(Blob);
@@ -133,5 +132,27 @@ class BlobManager {
 
 	get allBlobs() {
 		return this.blobs;
+	}
+
+	getRandomSpawnPosition() {
+		return createVector(
+			random(
+				this.gameboard.width), 
+			random(
+				this.gameboard.height));
+	}
+
+	// Hack to not spawn drones on screen
+	doNotSpawnNear(pos) {
+		this.avoidWhenSpawningDrones = pos;
+	}
+
+	// Hack to not spawn drones on screen
+	isSpawnPositionOk(pos) {
+		if (this.avoidWhenSpawningDrones) {
+			return this.avoidWhenSpawningDrones.dist(pos) > max(width, height) / 2;
+		} else {
+			return true;
+		}
 	}
 }

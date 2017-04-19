@@ -1,4 +1,12 @@
 class Constants {
+	static get GAME_SIZE() {
+		return 2000;
+	}
+
+	static get INITIAL_BLOB_AMOUNT() {
+		return Constants.GAME_SIZE * 0.025;
+	}	
+
 	static get BLOB_SATURATION() {
 		return 120;
 	}

@@ -1,18 +1,25 @@
+let canvasToWindowWidthRatio = 5/7;
+let canvasToWindowHeightRatio = 5/7;
+
 let blobManager;
 let manualInput;
 let joystick;
 let player;
 let followCam;
 let gameboard;
-let gamesize = 2000;
+let gamesize = Constants.GAME_SIZE;
 let backgroundColor;
 
 let respawnPopup;
 
+// Makes sure resources are loaded before initiatin sketch
+function preload() {
+}
+
 function setup() {
 	let canvas = createCanvas(
-		window.innerWidth * 5/7,
-		window.innerHeight * 5/7
+		window.innerWidth * canvasToWindowWidthRatio,
+		window.innerHeight * canvasToWindowHeightRatio
 		);
 
 	// frameRate(1);
@@ -34,8 +41,6 @@ function setup() {
 }
 
 function draw() {
-	// background(50);
-	// gameboard.display();
 	player.update();
 	blobManager.update();
 	manualInput.update();
@@ -43,3 +48,15 @@ function draw() {
 	joystick.run();
 	respawnPopup.run();
 }
+
+function windowResized() {
+	resizeCanvas(
+		window.innerWidth * canvasToWindowWidthRatio,
+		window.innerHeight * canvasToWindowHeightRatio);
+	onResize();
+}
+
+function onResize() {
+	respawnPopup.reposition();
+}
+
