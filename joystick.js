@@ -19,6 +19,8 @@ class Joystick {
 		this.decidingDimension = min(width, height);
 
 		this.radius = this.decidingDimension/8;
+		this.borderWidth = this.radius * (1/5);
+
 		this.thumbSize = this.radius/1.2;
 		this.innerThumbSize = this.thumbSize * (3/4);
 		this.edgeMargin = this.radius * (7/5);
@@ -51,6 +53,7 @@ class Joystick {
 
 	display() {
 		stroke(this.borderColor);
+		strokeWeight(this.borderWidth);
 		fill(this.color);
 		ellipse(this.pos.x, this.pos.y, this.radius * 2);
 

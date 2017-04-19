@@ -1,6 +1,8 @@
 class FollowCam {
-	constructor(blobManager) {
-		this.blobManager = blobManager;
+	constructor(gameBoard, allBlobs) {
+		this.gameBoard = gameBoard;
+
+		this.allBlobs = allBlobs;
 		this.followee = null;
 		this.viewZeroInGameSpace = null;
 		this.gameZeroInScreenSpace = null;
@@ -34,14 +36,20 @@ class FollowCam {
 	}
 
 	renderObjectsInView() {
+		this.render(this.gameBoard);
+
 		let thisHandle = this;
-		let everythingThisCamRendereds = this.getRenderedObjects();
-		everythingThisCamRendereds.forEach(function(rendObj) {
-			if (thisHandle.isWithinViewFrustum(rendObj)) {
-				let screenSpaceCoord = thisHandle.convertToScreenSpace(rendObj.pos);
-				rendObj.displayAt(screenSpaceCoord);
-			}
+		let allBlobs = this.allBlobs;
+		allBlobs.forEach(function(rendObj) {
+			// if (thisHandle.isWithinViewFrustum(rendObj)) {
+				thisHandle.render(rendObj);
+			// }
 		});
+	}
+
+	render(object) {
+		let screenSpaceCoord = this.convertToScreenSpace(object.pos);
+		object.displayAt(screenSpaceCoord);
 	}
 
 	convertToScreenSpace(gameSpaceCoord) {
@@ -52,17 +60,13 @@ class FollowCam {
 		return p5.Vector.add(screenSpaceCoord, this.viewZeroInGameSpace);
 	}
 
-	getRenderedObjects() {
-		return this.blobManager.allBlobs;
-	}
-
-	isWithinViewFrustum(object) {
-		let screenSpaceCoord = this.convertToScreenSpace(object.pos);
-		return screenSpaceCoord.x >= 0 && 
-		screenSpaceCoord.x < width &&
-		screenSpaceCoord.y >= 0 && 
-		screenSpaceCoord.y < height;
-	}
+	// isWithinViewFrustum(object) {
+	// 	let screenSpaceCoord = this.convertToScreenSpace(object.pos);
+	// 	return screenSpaceCoord.x >= 0 && 
+	// 	screenSpaceCoord.x < width &&
+	// 	screenSpaceCoord.y >= 0 && 
+	// 	screenSpaceCoord.y < height;
+	// }
 
 	smoothFollow(entity) {
 		let desiredPos = entity.pos;
