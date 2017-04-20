@@ -7,7 +7,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ## [Unreleased]
 
 ## [0.8.0] - 2016-12-20
-### Added
+### Added 
 - Respawn drones outside screen.
 
 ### Changed
