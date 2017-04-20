@@ -842,7 +842,7 @@ let canvasToWindowWidthRatio = 5/7;
 let canvasToWindowHeightRatio = 5/7;
 
 let blobManager;
-let manualInput;
+let manualInput; 
 let joystick;
 let player;
 let followCam;
