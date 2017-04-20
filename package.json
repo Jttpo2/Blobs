@@ -16,6 +16,7 @@
   "homepage": "https://github.com/Jttpo2/Blobs#readme",
   "devDependencies": {
     "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
     "gulp-livereload": "^3.8.1"
   },
   "jshintConfig": {
