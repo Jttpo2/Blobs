@@ -6,7 +6,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
 
-## [0.8.0] - 2016-12-20
+## [0.10.0] - 2016-12-20
+### Added
+- Make input work for touch.
+
+## [0.9.0] - 2016-12-20
 ### Added
 - Concatenated version of sketch js files.
 - Index file for concat version.

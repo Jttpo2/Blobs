@@ -1,6 +1,6 @@
 {
   "name": "Blobs",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "description": "Simple blob eat blob game using p5.js",
   "main": "index.html",
   "scripts": {},
