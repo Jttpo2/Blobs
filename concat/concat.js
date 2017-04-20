@@ -476,20 +476,25 @@ class ManualInput extends InputModule {
 
 		this.spawnKey = ' ';
 		this.killKey = 'k';
+
+		this.mousePos = null;
+
+		this.touchInputVector = createVector(0, 0);
 	}
 
 	update() {
-		this.handelMouseInput();
+		this.handleMouseInput();
 		this.handleKeyboardInput();
 		this.handleTouchInput();
 	}	
 
-	handelMouseInput() {
-		let mousePos = createVector(mouseX, mouseY);
+	handleMouseInput() {
+		this.mousePos = createVector(mouseX, mouseY);
 		if (mouseIsPressed) {
-			this.joystick.feedInput(mousePos);
+			// Input started this update or continues from previous one
+			this.joystick.feedInput(this.mousePos);
 		} else if (this.mouseIsPressedPrev) {
-			// Input stopped since last frame
+			// Input stopped since last update
 			this.joystick.finishInput();
 		}
 
@@ -497,19 +502,15 @@ class ManualInput extends InputModule {
 	}
 
 	handleTouchInput() {
-		// Might work for touch input?
-		// if (touches.length > 0) {
-		// 	if (this.previousTouchLength <= 0) {
-		// 		// Input started this update
-		// 		this.joystick.startInput(mousePos);
-		// 	} else {
-		// 		// Input continues from previous update
-		// 		this.joystick.continueInput(mousePos);
-		// 	}
-		// } else if (this.previousTouchLength > 0) {
-		// 	// Input stopped since last frame
-		// 	this.joystick.finishInput();
-		// }
+		if (touches.length > 0) {
+			// Input started this update or continues from previous one
+			// TODO: Only concentrate on first touch for now
+			let touch = touches[0];
+			this.touchInputVector = createVector(touch.x, touch.y);
+			this.joystick.feedInput(this.touchInputVector);
+		} else { 
+			this.joystick.finishInput();
+		}
 	}
 
 	handleKeyboardInput() {
