@@ -838,7 +838,7 @@ class Blob extends Particle {
 		this.inputModule = inputModule;
 	}
 }
-// blobs.js T
+// blobs.js
 
 let canvasToWindowWidthRatio = 5/7;
 let canvasToWindowHeightRatio = 5/7;
