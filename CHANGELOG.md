@@ -5,9 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
+### Added
+- Concatenated version of sketch js files.
+- Index file for concat version.
+
+### Changed
+- File structure refactoring.
 
 ## [0.8.0] - 2016-12-20
-### Added
+### Added 
 - Respawn drones outside screen.
 
 ### Changed

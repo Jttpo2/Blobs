@@ -24,8 +24,6 @@ function setup() {
 
 	// frameRate(1);
 
-	canvas.parent('sketch-holder');
-
 	backgroundColor = color(50);
 	gameboard = new Gameboard(gamesize, gamesize, backgroundColor);
 	joystick = new Joystick();
