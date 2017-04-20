@@ -5,6 +5,8 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
+
+## [0.8.0] - 2016-12-20
 ### Added
 - Concatenated version of sketch js files.
 - Index file for concat version.
