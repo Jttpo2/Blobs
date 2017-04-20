@@ -1,7 +1,7 @@
 let canvasToWindowWidthRatio = 5/7;
 let canvasToWindowHeightRatio = 5/7;
 
-let blobManager; 
+let blobManager;
 let manualInput;
 let joystick;
 let player;
