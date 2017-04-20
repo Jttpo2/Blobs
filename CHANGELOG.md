@@ -5,9 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
+
+## [0.11.0] - 2016-12-20
 ### Added
 - Make input work for touch.
-
 
 ## [0.10.0] - 2016-12-20
 ### Added
