@@ -16,9 +16,12 @@ class ManualInput extends InputModule {
 	}
 
 	update() {
-		this.handleMouseInput();
-		this.handleKeyboardInput();
-		this.handleTouchInput();
+		if (!isTouchDevice) {
+			this.handleMouseInput();
+			this.handleKeyboardInput();
+		} else {
+			this.handleTouchInput();		
+		}
 	}	
 
 	handleMouseInput() {
@@ -37,7 +40,7 @@ class ManualInput extends InputModule {
 	handleTouchInput() {
 		if (touches.length > 0) {
 			// Input started this update or continues from previous one
-			// TODO: Only concentrate on first touch for now
+			// TODO: Only concentrates on first touch for now
 			let touch = touches[0];
 			this.touchInputVector = createVector(touch.x, touch.y);
 			this.joystick.feedInput(this.touchInputVector);
@@ -47,7 +50,6 @@ class ManualInput extends InputModule {
 	}
 
 	handleKeyboardInput() {
-		
 		if (keyIsPressed) {
 			if (key != this.prevKey) {
 				// Respawn on any key

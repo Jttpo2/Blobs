@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Changed
 - Stopped tracking concatenated js. Deployment is handled by git hooks post-commit and post-merge.
 - Different respawn messages on touch and desktop.
+- Any key respawns when dead.
 
 ## [0.11.0] - 2016-12-20
 ### Added

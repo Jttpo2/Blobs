@@ -1,6 +1,6 @@
 class RespawnPopup {
 	constructor() {
-		this.desktopText = 'Hit space to respawn';
+		this.desktopText = 'Hit any key to respawn';
 		this.touchText = 'Tap to respawn';
 		this.otherMediumText = 'Do something to respawn';
 
