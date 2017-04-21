@@ -5,11 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
+
+## [0.12.0] - 2016-12-21
+### Added
+- Respawns on tap when on touch device.
+
 ### Changed
 - Stopped tracking concatenated js. Deployment is handled by git hooks post-commit and post-merge.
 - Different respawn messages on touch and desktop.
 - Any key respawns when dead.
-- Respawns on tap when on touch device.
 
 ## [0.11.0] - 2016-12-20
 ### Added
