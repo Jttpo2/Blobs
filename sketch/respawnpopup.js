@@ -52,9 +52,9 @@ class RespawnPopup {
 		textSize(this.textSize);
 
 		let textToDisplay = '';
-		if (this.isOnDesktop) {
+		if (this.isOnDesktop()) {
 			textToDisplay = this.desktopText;
-		} else if (this.isOnMobile) {
+		} else if (this.isOnMobile()) {
 			textToDisplay = this.touchText;
 		} else {
 			textToDisplay = this.otherMediumText;
@@ -63,13 +63,11 @@ class RespawnPopup {
 	}
 
 	isOnMobile() {
-		// TODO: implement 
-		return false;
+		return isTouchDevice;
 	} 
 
 	isOnDesktop() {
-		// TODO: implement
-		return true;
+		return !isTouchDevice;
 	}
 
 	observerUpdate(message) {

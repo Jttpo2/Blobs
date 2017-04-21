@@ -8,7 +8,6 @@ class ManualInput extends InputModule {
 		this.keyIsPressedPrev = null;
 		this.prevKey = null;
 
-		this.spawnKey = ' ';
 		this.killKey = 'k';
 
 		this.mousePos = null;
@@ -50,9 +49,12 @@ class ManualInput extends InputModule {
 	handleKeyboardInput() {
 		
 		if (keyIsPressed) {
-			if (key == this.spawnKey && this.prevKey != this.spawnKey) {
+			if (key != this.prevKey) {
+				// Respawn on any key
 				this.notifySpawnPlayer();
-			} else if (this.prevKey == this.spawnKey && key == this.spawnkey) {
+			}
+
+			if (this.prevKey == this.spawnKey && key == this.spawnkey) {
 				// Do nothing on prolonged presses on same key.
 				// TODO: Doesn't work
 			} else if (key == this.killKey && this.prevKey != this.killKey) {
@@ -90,7 +92,7 @@ class ManualInput extends InputModule {
 
 	notifySpawnPlayer() {
 		this.notify({
-			message: "SpawnPlayer"
+			message: "Spawn Player"
 		});
 	}
 }

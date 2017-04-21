@@ -48,7 +48,7 @@ class Player {
 	// ***** React to input from objects observed by player *************
 
 	observerUpdate(message) {
-		if (message.message == "SpawnPlayer") {
+		if (message.message == "Spawn Player") {
 			this.spawnPlayer(this.pos);
 		} else if (message.message == "Kill Player") {
 			this.killPlayer();

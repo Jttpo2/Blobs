@@ -14,6 +14,8 @@ let backgroundColor;
 
 let respawnPopup;
 
+let isTouchDevice = false; // Start with the assumption that we are on desktop
+
 // Makes sure resources are loaded before initiatin sketch
 function preload() {
 }
@@ -22,7 +24,7 @@ function setup() {
 	let canvas = createCanvas(
 		window.innerWidth * canvasToWindowWidthRatio,
 		window.innerHeight * canvasToWindowHeightRatio
-		);
+		); 
 
 	// frameRate(1);
 
@@ -41,6 +43,8 @@ function setup() {
 }
 
 function draw() {
+	detectIfTouchDevice();
+
 	player.update();
 	blobManager.update();
 	manualInput.update();
@@ -58,5 +62,13 @@ function windowResized() {
 
 function onResize() {
 	respawnPopup.reposition();
+}
+
+// Hack to check whether we're on a touch device. 
+// Must be called every frame
+function detectIfTouchDevice() {
+	if (touches.length > 0) {
+		isTouchDevice = true;
+	}
 }
 
