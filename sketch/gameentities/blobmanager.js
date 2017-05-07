@@ -4,7 +4,6 @@ class BlobManager {
 
 		this.blobs = [];
 		this.initialBlobAmount = Constants.INITIAL_BLOB_AMOUNT;
-		this.standardBlobSize = 10;
 
 		colorMode(HSB, 255, 255, 255);
 		this.playerBlobColor = Constants.PLAYER_BLOB_COLOR;
@@ -41,7 +40,7 @@ class BlobManager {
 			randomGaussian(0, 2), 
 			randomGaussian(0, 2));
 		let size = randomGaussian(
-			this.standardBlobSize, 10);
+			Constants.DRONE_AVERAGE_SIZE, Constants.DRONE_SIZE_STANDARD_DEVIATION);
 		let col = color(
 			random(255), 
 			Constants.BLOB_SATURATION, 
@@ -52,7 +51,8 @@ class BlobManager {
 			size, 
 			col, 
 			pos, 
-			vel, 
+			vel,
+			Constants.DRONE_MAX_VELOCITY, 
 			isManual);
 		blob.setInputModule(inputModule);
 		this.blobs.push(blob);
@@ -60,13 +60,14 @@ class BlobManager {
 
 	initPlayerBlob(pos) {
 		let vel = createVector(0, 0);
-		let size = this.standardBlobSize + 0.2;
+		let size = Constants.DRONE_AVERAGE_SIZE + 0.2;
 		let isManual = true;
 		this.playerBlob = new Blob(
 			size, 
 			this.playerBlobColor, 
 			pos, 
-			vel, 
+			vel,
+			Constants.PLAYER_MAX_VELOCITY,
 			isManual);
 		this.blobs.push(this.playerBlob);
 		return this.playerBlob;

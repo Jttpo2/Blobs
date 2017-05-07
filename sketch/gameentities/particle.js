@@ -1,10 +1,10 @@
 class Particle {
-	constructor(size, particleColor, startingPosition, initialVelocity) {
+	constructor(size, particleColor, startingPosition, initialVelocity, maxVel) {
 		this.pos = startingPosition;
 		this.vel = initialVelocity;
 		this.acc = createVector(0, 0);
 
-		this.maxSpeed = 2;
+		this.maxSpeed = maxVel;
 		this.size = size; // Radius
 		this.color = particleColor;
 	}

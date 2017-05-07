@@ -8,6 +8,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Added
 - Simple background texture: Grid or dots.
 
+### Changed
+- Player has slightly higher maximum velocity than drone blobs to make game more enjoyable.
+
 ## [0.12.0] - 2016-12-21
 ### Added
 - Respawns on tap when on touch device.

@@ -1,6 +1,6 @@
 class Blob extends Particle {
-	constructor (size, blobColor, startingPosition, initialVelocity, isManual) {
-		super(size, blobColor, startingPosition, initialVelocity);
+	constructor (size, blobColor, startingPosition, initialVelocity, maxVel, isManual) {
+		super(size, blobColor, startingPosition, initialVelocity, maxVel);
 
 		this.isManual = isManual;
 		this.isAlive = true;
