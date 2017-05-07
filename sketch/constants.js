@@ -3,6 +3,14 @@ class Constants {
 		return 2000;
 	}
 
+	static get GAMEBOARD_PATTERN_SIZE() {
+		let patternSize = 50;
+		
+		let noOfLines = Constants.GAME_SIZE / patternSize;
+		noOfLines = floor(noOfLines);
+		return Constants.GAME_SIZE / noOfLines;
+	}
+
 	static get INITIAL_BLOB_AMOUNT() {
 		return Constants.GAME_SIZE * 0.025;
 	}	

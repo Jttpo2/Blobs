@@ -11,6 +11,7 @@ let followCam;
 let gameboard;
 let gamesize = Constants.GAME_SIZE;
 let backgroundColor;
+let patternColor;
 
 let respawnPopup;
 
@@ -29,7 +30,8 @@ function setup() {
 	// frameRate(1);
 
 	backgroundColor = color(50);
-	gameboard = new Gameboard(gamesize, gamesize, backgroundColor);
+	patternColor = color(100);
+	gameboard = new Gameboard(gamesize, gamesize, backgroundColor, patternColor);
 	joystick = new Joystick();
 	manualInput = new ManualInput(joystick);
 	blobManager = new BlobManager(gameboard);
