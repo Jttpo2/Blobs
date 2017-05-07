@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ## [Unreleased]
 ### Added
 - Simple background texture: Grid or dots.
+- Player blob affected by friction.
 
 ### Changed
 - Player has slightly higher maximum velocity than drone blobs to make game more enjoyable.
