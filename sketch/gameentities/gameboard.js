@@ -1,3 +1,4 @@
+// Represents the blob world
 class Gameboard {
 	constructor(boardWidth, boardHeight, backgroundColor, patternColor) {
 		this.width = boardWidth;
@@ -79,6 +80,5 @@ class Gameboard {
 				point(topLeftInScreenSpace.x + x, topLeftInScreenSpace.y + y);
 			}
 		}
-
 	}
 }
