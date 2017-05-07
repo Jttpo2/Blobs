@@ -15,10 +15,15 @@ class BlobManager {
 
 	update() {
 		let thisHandle = this;
+		
+		// Correct place to do this?
+		this.applyFriction(this.playerBlob);
+
 		this.blobs.forEach(function(blob) {
+			// this.applyFriction(blob);
 			blob.update();
 			thisHandle.repositionOutsideGameboard(blob);
-		});
+		}, this);
 		this.checkForCollisions();
 
 		this.deleteDeadBlobs();
@@ -155,5 +160,12 @@ class BlobManager {
 		} else {
 			return true;
 		}
+	}
+
+	applyFriction(blob) {
+		let friction = blob.vel.copy().normalize();
+		let normal = blob.mass;
+		friction.mult(-1 * Constants.FRICTION_COEFFICIENT * normal);
+		blob.applyForce(friction);
 	}
 }

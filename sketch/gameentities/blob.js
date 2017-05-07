@@ -93,7 +93,7 @@ class Blob extends Particle {
 	}
 
 	moveInDirection(direction) {
-		let scalar = 4;
+		let scalar = 1;
 		this.applyForce(direction.mult(scalar));
 	}
 

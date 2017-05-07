@@ -42,4 +42,8 @@ class Constants {
 	static get PLAYER_MAX_VELOCITY() {
 		return Constants.DRONE_MAX_VELOCITY + 0.1;
 	}
+
+	static get FRICTION_COEFFICIENT() {
+		return 0.03;
+	}
 }
