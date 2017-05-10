@@ -23,8 +23,8 @@ function preload() {
 
 function setup() {
 	let canvas = createCanvas(
-		window.innerWidth * canvasToWindowWidthRatio,
-		window.innerHeight * canvasToWindowHeightRatio
+		window.innerWidth, // * canvasToWindowWidthRatio,
+		window.innerHeight //* canvasToWindowHeightRatio
 		); 
 
 	// frameRate(1);
