@@ -32,9 +32,7 @@ class Particle {
 	}
 
 	applyForce(force) {
-		let f = force.copy();
-		f.div(this.mass);
-		this.acc.add(f);
+		this.acc.add(p5.Vector.div(force, this.mass));
 	}
 
 	get mass() {
