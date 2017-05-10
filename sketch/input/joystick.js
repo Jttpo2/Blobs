@@ -1,22 +1,24 @@
 class Joystick {
-	constructor() {
-		colorMode(HSB, 255, 255, 255);
-		this.color = color(134, 200, 100);
+	constructor(p) {
+		this.p = p; // p5.js instance
+
+		p.colorMode(p.HSB, 255, 255, 255);
+		this.color = p.color(134, 200, 100);
 		this.borderColor =
-		color(
-			hue(this.color), 
-			saturation(this.color), 
-			brightness(this.color) + 25);
-		this.thumbColor = color(
-			hue(this.color), 
-			saturation(this.color), 
-			brightness(this.color) - 40);
-		this.innerThumbColor  = color(
-			hue(this.color), 
-			saturation(this.color), 
-			brightness(this.color) + 80);
+		p.color(
+			p.hue(this.color), 
+			p.saturation(this.color), 
+			p.brightness(this.color) + 25);
+		this.thumbColor = p.color(
+			p.hue(this.color), 
+			p.saturation(this.color), 
+			p.brightness(this.color) - 40);
+		this.innerThumbColor  = p.color(
+			p.hue(this.color), 
+			p.saturation(this.color), 
+			p.brightness(this.color) + 80);
 		
-		this.decidingDimension = min(width, height);
+		this.decidingDimension = p.min(p.width, p.height);
 
 		this.radius = this.decidingDimension/8;
 		this.borderWidth = this.radius * (1/5);
@@ -24,9 +26,9 @@ class Joystick {
 		this.thumbSize = this.radius/1.2;
 		this.innerThumbSize = this.thumbSize * (3/4);
 		this.edgeMargin = this.radius * (7/5);
-		this.pos = createVector(
+		this.pos = p.createVector(
 			this.edgeMargin,
-			height -this.edgeMargin
+			p.height -this.edgeMargin
 			);
 
 		this.thumbPos = this.pos;
@@ -52,19 +54,20 @@ class Joystick {
 	}
 
 	display() {
-		stroke(this.borderColor);
-		strokeWeight(this.borderWidth);
-		fill(this.color);
-		ellipse(this.pos.x, this.pos.y, this.radius * 2);
+		let p = this.p;
+		p.stroke(this.borderColor);
+		p.strokeWeight(this.borderWidth);
+		p.fill(this.color);
+		p.ellipse(this.pos.x, this.pos.y, this.radius * 2);
 
-		noStroke();
+		p.noStroke();
 		// Thumb
-		fill(this.thumbColor);
-		ellipse(this.thumbPos.x, this.thumbPos.y, this.thumbSize);
+		p.fill(this.thumbColor);
+		p.ellipse(this.thumbPos.x, this.thumbPos.y, this.thumbSize);
 
 		// Inner thumb
-		fill(this.innerThumbColor);
-		ellipse(this.thumbPos.x, this.thumbPos.y, this.innerThumbSize);
+		p.fill(this.innerThumbColor);
+		p.ellipse(this.thumbPos.x, this.thumbPos.y, this.innerThumbSize);
 	}
 
 	feedInput(pos) {

@@ -1,6 +1,6 @@
 class Blob extends Particle {
-	constructor (size, blobColor, startingPosition, initialVelocity, maxVel, isManual) {
-		super(size, blobColor, startingPosition, initialVelocity, maxVel);
+	constructor (p, size, blobColor, startingPosition, initialVelocity, maxVel, isManual) {
+		super(p, size, blobColor, startingPosition, initialVelocity, maxVel);
 
 		this.isManual = isManual;
 		this.isAlive = true;
@@ -17,15 +17,16 @@ class Blob extends Particle {
 	}
 	
 	displayAt(pos) {
+		let p=this.p;
 		if (this.isAlive) {
 			super.displayAt(pos);
 			if (this.isManual) {
 				// Distinguish player blob by
 				
-				colorMode(HSB, 255, 255, 255);
+				p.colorMode(p.HSB, 255, 255, 255);
 
 				// border 
-				noFill();
+				p.noFill();
 				// stroke(
 				// 	color(
 				// 		hue(this.color), 
@@ -37,13 +38,13 @@ class Blob extends Particle {
 				// 	size * 2);
 
 				// center spot
-				noStroke();
-				fill(
-					color(
-						hue(this.color), 
-						saturation(this.color), 
-						brightness(this.color) - 100));
-				ellipse(
+				p.noStroke();
+				p.fill(
+					p.color(
+						p.hue(this.color), 
+						p.saturation(this.color), 
+						p.brightness(this.color) - 100));
+				p.ellipse(
 					pos.x, 
 					pos.y, 
 					this.size * (5/6));
@@ -75,11 +76,11 @@ class Blob extends Particle {
 	}
 
 	calcArea() {
-		return PI * this.size * this.size;
+		return Math.PI * this.size * this.size;
 	}
 
 	static calcRadius(area) {
-		return sqrt(area/PI);
+		return Math.sqrt(area/Math.PI);
 	}
 
 	bounceFrom(otherBlob) {

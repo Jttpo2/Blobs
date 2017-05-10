@@ -7,7 +7,7 @@ class Constants {
 		let patternSize = 50;
 		
 		let noOfLines = Constants.GAME_SIZE / patternSize;
-		noOfLines = floor(noOfLines);
+		noOfLines = Math.floor(noOfLines);
 		return Constants.GAME_SIZE / noOfLines;
 	}
 
@@ -22,10 +22,6 @@ class Constants {
 	static get BLOB_BRIGHTNESS() {
 		return 230;
 	}
-	
-	static get PLAYER_BLOB_COLOR() {
-		return color(1, 255, 170);
-	}	
 
 	static get DRONE_MAX_VELOCITY() {
 		return 2;

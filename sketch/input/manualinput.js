@@ -1,6 +1,6 @@
 class ManualInput extends InputModule {
-	constructor(joystick) {
-		super();
+	constructor(p, joystick) {
+		super(p);
 		joystick.attach(this);
 		this.joystick = joystick;
 
@@ -12,7 +12,7 @@ class ManualInput extends InputModule {
 
 		this.mousePos = null;
 
-		this.touchInputVector = createVector(0, 0);
+		this.touchInputVector = p.createVector(0, 0);
 		this.prevTouchesLength = 0;
 	}
 
@@ -26,8 +26,9 @@ class ManualInput extends InputModule {
 	}	
 
 	handleMouseInput() {
-		this.mousePos = createVector(mouseX, mouseY);
-		if (mouseIsPressed) {
+		let p = this.p;
+		this.mousePos = p.createVector(p.mouseX, p.mouseY);
+		if (p.mouseIsPressed) {
 			// Input started this update or continues from previous one
 			this.joystick.feedInput(this.mousePos);
 			
@@ -40,15 +41,16 @@ class ManualInput extends InputModule {
 			this.joystick.finishInput();
 		}
 
-		this.mouseIsPressedPrev = mouseIsPressed;
+		this.mouseIsPressedPrev = p.mouseIsPressed;
 	}
 
 	handleTouchInput() {
-		if (touches.length > 0) {
+		let p=this.p;
+		if (p.touches.length > 0) {
 			// Input started this update or continues from previous one
 			// TODO: Only concentrates on first touch for now
-			let touch = touches[0];
-			this.touchInputVector = createVector(touch.x, touch.y);
+			let touch = p.touches[0];
+			this.touchInputVector = p.createVector(touch.x, touch.y);
 			this.joystick.feedInput(this.touchInputVector);
 
 			if (this.prevTouchesLength === 0) {
@@ -59,15 +61,19 @@ class ManualInput extends InputModule {
 			this.joystick.finishInput();
 		}
 
-		this.prevTouchesLength = touches.length;
+		this.prevTouchesLength = p.touches.length;
 	}
 
 	handleKeyboardInput() {
-		if (keyIsPressed) {
+		let p=this.p;
+		let key = p.key;
+		if (p.keyIsPressed) {
 			if (key != this.prevKey) {
 				// Respawn on any key
 				this.notifySpawnPlayer();
 			}
+			
+			let keyCode = p.keyCode;
 
 			if (this.prevKey === this.spawnKey && key === this.spawnkey) {
 				// Do nothing on prolonged presses on same key.
@@ -79,13 +85,13 @@ class ManualInput extends InputModule {
 			} 
 
 			// Legacy keyboard input
-			else if (keyCode === UP_ARROW) {
+			else if (keyCode === p.UP_ARROW) {
 				this.notifyMovement(InputModule.VECTOR_UP);
-			} else if (keyCode === DOWN_ARROW) {
+			} else if (keyCode === p.DOWN_ARROW) {
 				this.notifyMovement(InputModule.VECTOR_DOWN);
-			} else if (keyCode === LEFT_ARROW) {
+			} else if (keyCode === p.LEFT_ARROW) {
 				this.notifyMovement(InputModule.VECTOR_LEFT);
-			} else if (keyCode === RIGHT_ARROW) {
+			} else if (keyCode === p.RIGHT_ARROW) {
 				this.notifyMovement(InputModule.VECTOR_RIGHT);
 			} else {
 				console.log("No function for key: " + keyCode);

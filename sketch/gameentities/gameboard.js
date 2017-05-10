@@ -1,11 +1,13 @@
 // Represents the blob world
 class Gameboard {
-	constructor(boardWidth, boardHeight, backgroundColor, patternColor) {
+	constructor(p, boardWidth, boardHeight, backgroundColor, patternColor) {
+		this.p = p; // p5.js instance
+
 		this.width = boardWidth;
 		this.height = boardHeight;
 
 		// For rendering in screen space
-		this.pos = createVector(0, 0);
+		this.pos = p.createVector(0, 0);
 
 		this.borderWidth = 0;
 
@@ -13,15 +15,16 @@ class Gameboard {
 		this.patternColor = patternColor;
 		this.patternThickness = 2;
 		this.borderColorBrightnessOffset = 100;
-		colorMode(HSB, 255, 255, 255);
-		this.borderColor = color(
-			hue(this.backgroundColor), 
-			saturation(this.backgroundColor), 
-			brightness(this.backgroundColor) - this.borderColorBrightnessOffset);
+		p.colorMode(p.HSB, 255, 255, 255);
+		this.borderColor = p.color(
+			p.hue(this.backgroundColor), 
+			p.saturation(this.backgroundColor), 
+			p.brightness(this.backgroundColor) - this.borderColorBrightnessOffset);
 	}
 
 	display() {
-		this.displayAt(createVector(0, 0));
+		let p = this.p;
+		this.displayAt(p.createVector(0, 0));
 	}
 
 	displayAt(topLeftInScreenSpace) {
@@ -32,21 +35,23 @@ class Gameboard {
 
 	// The area outside the gameboard must be filled with visual content to not look a mess.
 	fillSurroundings() {
-		fill(this.borderColor);
-		noStroke();
-		rect(
-			this.pos.x - width, 
-			this.pos.y - height, 
-			this.width + width, 
-			this.height + height);
+		let p = this.p;
+		p.fill(this.borderColor);
+		p.noStroke();
+		p.rect(
+			this.pos.x - p.width, 
+			this.pos.y - p.height, 
+			this.width + p.width, 
+			this.height + p.height);
 	}
 
 	drawBackground(topLeftInScreenSpace) {
-		fill(this.backgroundColor);
-		stroke(this.borderColor);
-		strokeWeight(this.borderWidth);
+		let p = this.p;
+		p.fill(this.backgroundColor);
+		p.stroke(this.borderColor);
+		p.strokeWeight(this.borderWidth);
 
-		rect(
+		p.rect(
 			topLeftInScreenSpace.x, 
 			topLeftInScreenSpace.y, 
 			this.width, 
@@ -59,25 +64,27 @@ class Gameboard {
 	}
 
 	drawGrid(topLeftInScreenSpace) {
+		let p = this.p;
 		for (let x=Constants.GAMEBOARD_PATTERN_SIZE/2; x<this.width; x+=Constants.GAMEBOARD_PATTERN_SIZE) {
-			stroke(this.patternColor);
-			strokeWeight(this.patternThickness);
-			line(topLeftInScreenSpace.x + x, topLeftInScreenSpace.y, topLeftInScreenSpace.x + x, this.height);
+			p.stroke(this.patternColor);
+			p.strokeWeight(this.patternThickness);
+			p.line(topLeftInScreenSpace.x + x, topLeftInScreenSpace.y, topLeftInScreenSpace.x + x, this.height);
 		}
 
 		for (let y=Constants.GAMEBOARD_PATTERN_SIZE/2; y<this.width; y+=Constants.GAMEBOARD_PATTERN_SIZE) {
-			stroke(this.patternColor);
-			strokeWeight(this.patternThickness);
-			line(topLeftInScreenSpace.x, topLeftInScreenSpace.y + y, this.width, topLeftInScreenSpace.y + y);
+			p.stroke(this.patternColor);
+			p.strokeWeight(this.patternThickness);
+			p.line(topLeftInScreenSpace.x, topLeftInScreenSpace.y + y, this.width, topLeftInScreenSpace.y + y);
 		}
 	}
 
 	drawDots(topLeftInScreenSpace) {
+		let p = this.p;
 		for (let x=Constants.GAMEBOARD_PATTERN_SIZE/2; x<this.width; x+=Constants.GAMEBOARD_PATTERN_SIZE) {
 			for (let y=Constants.GAMEBOARD_PATTERN_SIZE/2; y<this.width; y+=Constants.GAMEBOARD_PATTERN_SIZE) {
-				stroke(this.patternColor);
-				strokeWeight(this.patternThickness);
-				point(topLeftInScreenSpace.x + x, topLeftInScreenSpace.y + y);
+				p.stroke(this.patternColor);
+				p.strokeWeight(this.patternThickness);
+				p.point(topLeftInScreenSpace.x + x, topLeftInScreenSpace.y + y);
 			}
 		}
 	}

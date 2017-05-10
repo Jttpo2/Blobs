@@ -1,27 +1,28 @@
 // "Abstract" steering module base class
 class InputModule {
-	constructor() {
+	constructor(p) {
+		this.p = p; // p5.js instance
 		this.observers = [];
 	}
 
 	static get VECTOR_UP() {
-		return createVector(0, -1);
+		return this.p.createVector(0, -1);
 	}
 
 	static get VECTOR_DOWN() {
-		return createVector(0, 1);
+		return this.p.createVector(0, 1);
 	}
 
 	static get VECTOR_LEFT() {
-		return createVector(-1, 0);
+		return this.p.createVector(-1, 0);
 	}
 
 	static get VECTOR_RIGHT() {
-		return createVector(1, 0);
+		return this.p.createVector(1, 0);
 	}
 
 	static get VECTOR_ZERO() {
-		return createVector(0, 0);
+		return this.p.createVector(0, 0);
 	}
 
 	update() {

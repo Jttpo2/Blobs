@@ -1,8 +1,10 @@
 class Particle {
-	constructor(size, particleColor, startingPosition, initialVelocity, maxVel) {
+	constructor(p, size, particleColor, startingPosition, initialVelocity, maxVel) {
+		this.p = p; // p5.js instance
+
 		this.pos = startingPosition;
 		this.vel = initialVelocity;
-		this.acc = createVector(0, 0);
+		this.acc = p.createVector(0, 0);
 
 		this.maxSpeed = maxVel;
 		this.size = size; // Radius
@@ -21,9 +23,10 @@ class Particle {
 	}
 
 	displayAt(pos) {
-		noStroke();
-		fill(this.color);
-		ellipse(pos.x, pos.y, this.size*2);
+		let p=this.p;
+		p.noStroke();
+		p.fill(this.color);
+		p.ellipse(pos.x, pos.y, this.size*2);
 	}
 
 	run() {
