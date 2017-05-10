@@ -11,6 +11,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ### Changed
 - Player has slightly higher maximum velocity than drone blobs to make game more enjoyable.
+- Refactored to p5 instance mode, to be able to have several sketches running independently on webpage.
+- Using javascript standard libs like Math when possible.
 
 ## [0.12.0] - 2016-12-21
 ### Added

@@ -21,35 +21,39 @@ class Blob extends Particle {
 		if (this.isAlive) {
 			super.displayAt(pos);
 			if (this.isManual) {
-				// Distinguish player blob by
-				
-				p.colorMode(p.HSB, 255, 255, 255);
-
-				// border 
-				p.noFill();
-				// stroke(
-				// 	color(
-				// 		hue(this.color), 
-				// 		saturation(this.color), 
-				// 		brightness(this.color) + 25));
-				// ellipse(
-				// 	pos.x, 
-				// 	pos.y, 
-				// 	size * 2);
-
-				// center spot
-				p.noStroke();
-				p.fill(
-					p.color(
-						p.hue(this.color), 
-						p.saturation(this.color), 
-						p.brightness(this.color) - 100));
-				p.ellipse(
-					pos.x, 
-					pos.y, 
-					this.size * (5/6));
+				this.markAsPlayerBlob(pos);
 			}
 		}
+	}
+
+	markAsPlayerBlob(pos) {
+		let p=this.p;
+		// Distinguish player blob by
+
+		p.colorMode(p.HSB, 255, 255, 255);
+		// border 
+		p.noFill();
+		// stroke(
+		// 	color(
+		// 		hue(this.color), 
+		// 		saturation(this.color), 
+		// 		brightness(this.color) + 25));
+		// ellipse(
+		// 	pos.x, 
+		// 	pos.y, 
+		// 	size * 2);
+
+		// center spot
+		p.noStroke();
+		p.fill(
+			p.color(
+				p.hue(this.color), 
+				p.saturation(this.color), 
+				p.brightness(this.color) - 100));
+		p.ellipse(
+			pos.x, 
+			pos.y, 
+			this.size * (5/6));
 	}
 
 	isCollidingWith(otherBlob) {
