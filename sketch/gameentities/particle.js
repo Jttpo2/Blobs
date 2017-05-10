@@ -1,10 +1,12 @@
 class Particle {
-	constructor(size, particleColor, startingPosition, initialVelocity) {
+	constructor(p, size, particleColor, startingPosition, initialVelocity, maxVel) {
+		this.p = p; // p5.js instance
+
 		this.pos = startingPosition;
 		this.vel = initialVelocity;
-		this.acc = createVector(0, 0);
+		this.acc = p.createVector(0, 0);
 
-		this.maxSpeed = 2;
+		this.maxSpeed = maxVel;
 		this.size = size; // Radius
 		this.color = particleColor;
 	}
@@ -21,9 +23,10 @@ class Particle {
 	}
 
 	displayAt(pos) {
-		noStroke();
-		fill(this.color);
-		ellipse(pos.x, pos.y, this.size*2);
+		let p=this.p;
+		p.noStroke();
+		p.fill(this.color);
+		p.ellipse(pos.x, pos.y, this.size*2);
 	}
 
 	run() {
@@ -32,9 +35,7 @@ class Particle {
 	}
 
 	applyForce(force) {
-		let f = force.copy();
-		f.div(this.mass);
-		this.acc.add(f);
+		this.acc.add(p5.Vector.div(force, this.mass));
 	}
 
 	get mass() {

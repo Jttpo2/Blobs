@@ -1,5 +1,7 @@
 class FollowCam {
-	constructor(gameBoard, allBlobs) {
+	constructor(p, gameBoard, allBlobs) {
+		this.p = p; // p5.js instance
+
 		this.gameBoard = gameBoard;
 
 		this.allBlobs = allBlobs;
@@ -9,7 +11,7 @@ class FollowCam {
 
 		this.lookingAtGameSpacePos = null;
 		this.movementDamping = 0.01;
-		this.lastFrameTime = millis();
+		this.lastFrameTime = Date.now();
 	}
 
 	follow(entity) {
@@ -18,6 +20,7 @@ class FollowCam {
 	}
 
 	update() {
+		let p=this.p;
 		if (this.followee) {
 			this.smoothFollow(this.followee);
 			this.viewZeroInGameSpace = this.getViewZeroInGameSpace(this.lookingAtGameSpacePos);
@@ -26,23 +29,23 @@ class FollowCam {
 
 		this.renderObjectsInView();
 
-		this.lastFrameTime = millis();
+		this.lastFrameTime = Date.now();
 	}
 
 	getViewZeroInGameSpace(lookingAtPos) {
-		return createVector(
-			lookingAtPos.x - width/2,
-			lookingAtPos.y - height/2);
+		let p=this.p;
+		return p.createVector(
+			lookingAtPos.x - p.width/2,
+			lookingAtPos.y - p.height/2);
 	}
 
 	renderObjectsInView() {
 		this.render(this.gameBoard);
 
-		let thisHandle = this;
 		let allBlobs = this.allBlobs;
 		allBlobs.forEach(function(rendObj) {
-			thisHandle.render(rendObj);
-		});
+			this.render(rendObj);
+		}, this);
 	}
 
 	render(object) {
@@ -74,6 +77,7 @@ class FollowCam {
 	}
 
 	getSecondsSinceLastFrame() {
-		return (millis() - this.lastFrameTime) / 1000;
+		let p=this.p;
+		return (Date.now() - this.lastFrameTime) / 1000;
 	}
 }

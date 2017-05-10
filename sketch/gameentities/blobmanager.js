@@ -1,13 +1,13 @@
 class BlobManager {
-	constructor(gameboard) {
+	constructor(p, gameboard) {
+		this.p = p; // p5.js instance
 		this.gameboard = gameboard;
 
 		this.blobs = [];
 		this.initialBlobAmount = Constants.INITIAL_BLOB_AMOUNT;
-		this.standardBlobSize = 10;
 
-		colorMode(HSB, 255, 255, 255);
-		this.playerBlobColor = Constants.PLAYER_BLOB_COLOR;
+		p.colorMode(p.HSB, 255, 255, 255);
+		this.playerBlobColor = p.color(1, 255, 170);
 
 		this.initBlobs();
 
@@ -15,11 +15,14 @@ class BlobManager {
 	}
 
 	update() {
-		let thisHandle = this;
+		// Correct place to do this?
+		this.applyFriction(this.playerBlob);
+
 		this.blobs.forEach(function(blob) {
+			// this.applyFriction(blob);
 			blob.update();
-			thisHandle.repositionOutsideGameboard(blob);
-		});
+			this.repositionOutsideGameboard(blob);
+		}, this);
 		this.checkForCollisions();
 
 		this.deleteDeadBlobs();
@@ -32,41 +35,47 @@ class BlobManager {
 	}
 
 	addBlob() {
+		let p=this.p;
 		// Hack to not spawn drones on screen
 		let pos = this.getRandomSpawnPosition();
 		while (!this.isSpawnPositionOk(pos)) {
 			pos = this.getRandomSpawnPosition();
 		}
-		let vel = createVector(
-			randomGaussian(0, 2), 
-			randomGaussian(0, 2));
-		let size = randomGaussian(
-			this.standardBlobSize, 10);
-		let col = color(
-			random(255), 
+		let vel = p.createVector(
+			p.randomGaussian(0, 2), 
+			p.randomGaussian(0, 2));
+		let size = p.randomGaussian(
+			Constants.DRONE_AVERAGE_SIZE, Constants.DRONE_SIZE_STANDARD_DEVIATION);
+		let col = p.color(
+			Math.random() * 255, 
 			Constants.BLOB_SATURATION, 
 			Constants.BLOB_BRIGHTNESS);
-		let inputModule = new PerlinInput();
+		let inputModule = new PerlinInput(p);
 		let isManual = false;
 		let blob = new Blob(
+			p,
 			size, 
 			col, 
 			pos, 
-			vel, 
+			vel,
+			Constants.DRONE_MAX_VELOCITY, 
 			isManual);
 		blob.setInputModule(inputModule);
 		this.blobs.push(blob);
 	}
 
 	initPlayerBlob(pos) {
-		let vel = createVector(0, 0);
-		let size = this.standardBlobSize + 0.2;
+		let p=this.p;
+		let vel = p.createVector(0, 0);
+		let size = Constants.DRONE_AVERAGE_SIZE + 0.2;
 		let isManual = true;
 		this.playerBlob = new Blob(
+			p, 
 			size, 
 			this.playerBlobColor, 
 			pos, 
-			vel, 
+			vel,
+			Constants.PLAYER_MAX_VELOCITY,
 			isManual);
 		this.blobs.push(this.playerBlob);
 		return this.playerBlob;
@@ -92,26 +101,25 @@ class BlobManager {
 	}
 
 	checkForCollisions() {
-		let surroundingClassHandle = this;
 		this.blobs.forEach(function(blob) {
-			surroundingClassHandle.blobs.forEach(function(otherBlob) {
+			this.blobs.forEach(function(otherBlob) {
 				if (otherBlob == this) {
 					return;
 				}
 				if(blob.isCollidingWith(otherBlob)) {
 					if (blob.size > otherBlob.size) {
 						blob.eat(otherBlob);
-						surroundingClassHandle.kill(otherBlob);
+						this.kill(otherBlob);
 					} else if (blob.size < otherBlob.size) {
 						otherBlob.eat(blob);
-						surroundingClassHandle.kill(blob);
+						this.kill(blob);
 					} else {
 						blob.bounceFrom(otherBlob);
 						otherBlob.bounceFrom(Blob);
 					}
 				}
-			});
-		});
+			}, this);
+		}, this);
 	}
 
 	kill(blob) {
@@ -135,11 +143,10 @@ class BlobManager {
 	}
 
 	getRandomSpawnPosition() {
-		return createVector(
-			random(
-				this.gameboard.width), 
-			random(
-				this.gameboard.height));
+		let p=this.p;
+		return p.createVector(
+			Math.random() * this.gameboard.width, 
+			Math.random() * this.gameboard.height);
 	}
 
 	// Hack to not spawn drones on screen
@@ -149,10 +156,18 @@ class BlobManager {
 
 	// Hack to not spawn drones on screen
 	isSpawnPositionOk(pos) {
+		let p=this.p;
 		if (this.avoidWhenSpawningDrones) {
-			return this.avoidWhenSpawningDrones.dist(pos) > max(width, height) / 2;
+			return this.avoidWhenSpawningDrones.dist(pos) > p.max(p.width, p.height) / 2;
 		} else {
 			return true;
 		}
+	}
+
+	applyFriction(blob) {
+		let friction = blob.vel.copy().normalize();
+		let normal = blob.mass;
+		friction.mult(-1 * Constants.FRICTION_COEFFICIENT * normal);
+		blob.applyForce(friction);
 	}
 }

@@ -1,20 +1,23 @@
 class RespawnPopup {
-	constructor() {
+	constructor(p) {
+		this.p = p; // p5.js instance
+
 		this.desktopText = 'Hit any key to respawn';
 		this.touchText = 'Tap to respawn';
 		this.otherMediumText = 'Do something to respawn';
 
 		this.pos = null;
 		this.reposition();
-		this.textSize = height * (1/19);
-		colorMode(HSB, 255, 255, 255);
-		this.textColor = RespawnPopup.getColorWithRandomHue( 
+		this.textSize = p.height * (1/19);
+		p.colorMode(p.HSB, 255, 255, 255);
+		this.textColor = RespawnPopup.getColorWithRandomHue(
+			p,
 			Constants.BLOB_SATURATION - 20, 
 			Constants.BLOB_BRIGHTNESS -110);
-		this.outlineColor = color(
-			hue(this.textColor), 
-			saturation(this.textColor) -20, 
-			brightness(this.textColor) -150);
+		this.outlineColor = p.color(
+			p.hue(this.textColor), 
+			p.saturation(this.textColor) -20, 
+			p.brightness(this.textColor) -150);
 	}	
 
 	run() {
@@ -39,17 +42,19 @@ class RespawnPopup {
 
 	// Private
 	displayOnScreen() {
-		textAlign(CENTER);
-		textStyle(NORMAL);
-		textFont();
-		fill(
+		let p=this.p;
+		p.textAlign(p.CENTER);
+		p.textStyle(p.NORMAL);
+		p.textFont();
+		p.fill(
 			RespawnPopup.getColorWithRandomHue(
-				saturation(this.textColor), 
-				brightness(this.textColor)));
-		stroke(this.outlineColor);
-		// noStroke();
-		strokeWeight(2);
-		textSize(this.textSize);
+				p,
+				p.saturation(this.textColor), 
+				p.brightness(this.textColor)));
+		p.stroke(this.outlineColor);
+		// p.noStroke();
+		p.strokeWeight(2);
+		p.textSize(this.textSize);
 
 		let textToDisplay = '';
 		if (this.isOnDesktop()) {
@@ -59,7 +64,7 @@ class RespawnPopup {
 		} else {
 			textToDisplay = this.otherMediumText;
 		}
-		text(textToDisplay, this.pos.x, this.pos.y);
+		p.text(textToDisplay, this.pos.x, this.pos.y);
 	}
 
 	isOnMobile() {
@@ -78,16 +83,17 @@ class RespawnPopup {
 		}
 	}
 
-	static getColorWithRandomHue(saturation, brightness) {
-		return color(
-			random(255),
+	static getColorWithRandomHue(p, saturation, brightness) {
+		return p.color(
+			Math.random() * 255,
 			saturation,
 			brightness);
 	}
 
 	reposition() {
-		this.pos = createVector(
-			width * (1/2),
-			height * (3/7));
+		let p=this.p;
+		this.pos = p.createVector(
+			p.width * (1/2),
+			p.height * (3/7));
 	}
 }

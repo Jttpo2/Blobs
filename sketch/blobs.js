@@ -1,7 +1,7 @@
 // blobs.js
 
-let canvasToWindowWidthRatio = 5/7;
-let canvasToWindowHeightRatio = 5/7;
+let canvasToWindowWidthRatio = 1; //= 5/7;
+let canvasToWindowHeightRatio = 1; //= 5/7;
 
 let blobManager;
 let manualInput;
@@ -17,60 +17,65 @@ let respawnPopup;
 
 let isTouchDevice = false; // Start with the assumption that we are on desktop
 
-// Makes sure resources are loaded before initiatin sketch
-function preload() {
-}
+let sketch = function (p) {
+	// Makes sure resources are loaded before initiatin sketch
+	p.preload = function() {
 
-function setup() {
-	let canvas = createCanvas(
+	};
+
+	p.setup = function() {
+		let canvas = p.createCanvas(
 		window.innerWidth * canvasToWindowWidthRatio,
 		window.innerHeight * canvasToWindowHeightRatio
 		); 
 
-	// frameRate(1);
+		// frameRate(1);
 
-	backgroundColor = color(50);
-	patternColor = color(100);
-	gameboard = new Gameboard(gamesize, gamesize, backgroundColor, patternColor);
-	joystick = new Joystick();
-	manualInput = new ManualInput(joystick);
-	blobManager = new BlobManager(gameboard);
-	let playerStartPos = createVector(gameboard.width/2, gameboard.height/2);
-	player = new Player(playerStartPos, blobManager, manualInput);
-	followCam = new FollowCam(gameboard, blobManager.allBlobs);
-	followCam.follow(player);
+		backgroundColor = p.color(50);
+		patternColor = p.color(100);
+		gameboard = new Gameboard(p, gamesize, gamesize, backgroundColor, patternColor);
+		joystick = new Joystick(p);
+		manualInput = new ManualInput(p, joystick);
+		blobManager = new BlobManager(p, gameboard);
+		let playerStartPos = p.createVector(gameboard.width/2, gameboard.height/2);
+		player = new Player(playerStartPos, blobManager, manualInput);
+		followCam = new FollowCam(p, gameboard, blobManager.allBlobs);
+		followCam.follow(player);
 
-	respawnPopup = new RespawnPopup();
-	player.attach(respawnPopup);
-}
+		respawnPopup = new RespawnPopup(p);
+		player.attach(respawnPopup);
+	};
 
-function draw() {
-	detectIfTouchDevice();
+	p.draw = function() {
+		p.detectIfTouchDevice();
 
-	player.update();
-	blobManager.update();
-	manualInput.update();
-	followCam.update();
-	joystick.run();
-	respawnPopup.run();
-}
+		player.update();
+		blobManager.update();
+		manualInput.update();
+		followCam.update();
+		joystick.run();
+		respawnPopup.run();
+	};
 
-function windowResized() {
-	resizeCanvas(
-		window.innerWidth * canvasToWindowWidthRatio,
-		window.innerHeight * canvasToWindowHeightRatio);
-	onResize();
-}
+	p.windowResized = function() {
+		p.resizeCanvas(
+			window.innerWidth * canvasToWindowWidthRatio,
+			window.innerHeight * canvasToWindowHeightRatio);
+		p.onResize();
+	};
 
-function onResize() {
-	respawnPopup.reposition();
-}
+	p.onResize = function() {
+		respawnPopup.reposition();
+	};
 
-// Hack to check whether we're on a touch device. 
-// Must be called every frame
-function detectIfTouchDevice() {
-	if (touches.length > 0) {
-		isTouchDevice = true;
-	}
-}
+	// Hack to check whether we're on a touch device. 
+	// Must be called every frame
+	p.detectIfTouchDevice = function() {
+		if (p.touches.length > 0) {
+			isTouchDevice = true;
+		}
+	};
+};
+
+let myP5 = new p5(sketch);
 

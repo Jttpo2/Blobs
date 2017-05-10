@@ -5,8 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
+
+## [0.13.0] - 2017-05-10
 ### Added
 - Simple background texture: Grid or dots.
+- Player blob affected by friction.
+
+### Changed
+- Player has slightly higher maximum velocity than drone blobs to make game more enjoyable.
+- Refactored to p5 instance mode, to be able to have several sketches running independently on webpage.
+- Using javascript standard libs like Math when possible.
 
 ## [0.12.0] - 2016-12-21
 ### Added
