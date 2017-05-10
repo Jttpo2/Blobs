@@ -3,6 +3,9 @@
 let canvasToWindowWidthRatio = 1; //= 5/7;
 let canvasToWindowHeightRatio = 1; //= 5/7;
 
+let desiredFramerate = 60;
+let pausedFramerate = 1;
+
 let blobManager;
 let manualInput;
 let joystick;
@@ -47,6 +50,12 @@ let sketch = function (p) {
 	};
 
 	p.draw = function() {
+		if (p.focused) {
+			p.frameRate(desiredFramerate);
+		} else {
+			p.frameRate(pausedFramerate);
+		}
+
 		p.detectIfTouchDevice();
 
 		player.update();
