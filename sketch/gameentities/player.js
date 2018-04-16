@@ -1,9 +1,7 @@
 class Player {
-	constructor(startPos, blobManager, inputModule) {
+	constructor(startPos, blobManager) {
 		this.observers = [];
 		this.blobManager = blobManager;
-		inputModule.attach(this); // Listen to input
-		this.inputModule = inputModule;
 
 		this.blob = null;
 		this.spawnPlayer(startPos);
@@ -12,11 +10,11 @@ class Player {
 	spawnPlayer(pos) {
 		if (!this.blob || !this.blob.isAlive) {
 			this.blob = blobManager.initPlayerBlob(pos);
-			this.blob.setInputModule(this.inputModule);
+			// this.blob.setInputModule(this.inputModule);
 
 			this.notify({
 				message: "Player Respawned"
-			});			
+			});
 		}
 	}
 
@@ -34,7 +32,7 @@ class Player {
 		// Hack to not spawn drones on screen
 		// if (this.isAlive) {
 			this.blobManager.doNotSpawnNear(this.pos);
-		// } 
+		// }
 	}
 
 	get isAlive() {
@@ -45,9 +43,20 @@ class Player {
 		return this.blob.pos;
 	}
 
-	// ***** React to input from objects observed by player *************
+	moveTowards(pos) {
+		let movementVector = this.getMovementVectorTowards(pos);
+		this.blob.moveInDirection(movementVector);
+	}
 
+	getMovementVectorTowards(pos) {
+	  return p5.Vector.sub(pos, this.pos);
+	}
+
+	// ***** React to input from objects observed by player *************
 	observerUpdate(message) {
+		// if (message.message == InputEnum.INPUT_AT_POSITION) {
+		// 	this.moveTowards(message.vector);
+		// } else
 		if (message.message == "Spawn Player") {
 			this.spawnPlayer(this.pos);
 		} else if (message.message == "Kill Player") {

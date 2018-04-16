@@ -15,7 +15,7 @@ gulp.task('watch', function() {
 
 gulp.task('reload', function() {
 	livereload.reload();
-}); 
+});
 
 var sketchFolder = "sketch/";
 var sketchFiles = [
@@ -26,6 +26,7 @@ var sketchFiles = [
 'respawnpopup.js',
 'followcam.js',
 'input/joystick.js',
+'input/steeringdevice.js',
 'input/inputmodule.js',
 'input/manualinput.js',
 'input/perlininput.js',
@@ -33,6 +34,7 @@ var sketchFiles = [
 'gameentities/particle.js',
 'gameentities/blob.js',
 'blobs.js',
+'gameentities/brain.js',
 'gameentities/blobmanager.js'
 ];
 
