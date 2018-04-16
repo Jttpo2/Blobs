@@ -29,7 +29,7 @@ class ManualInput extends InputModule {
 		// Input started this update or continues from previous one
 		this.handleInputPosition(this.mousePos);
 
-		if (!this.mouseIsPressedPrev) {
+		if (p.mouseIsPressed && !this.mouseIsPressedPrev) {
 			// New input
 			this.notifySpawnPlayer();
 		}
@@ -51,7 +51,7 @@ class ManualInput extends InputModule {
 				this.notifySpawnPlayer();
 			}
 		}
-		
+
 		this.prevTouchesLength = p.touches.length;
 	}
 
