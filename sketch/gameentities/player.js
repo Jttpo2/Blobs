@@ -4,13 +4,14 @@ class Player {
 		this.blobManager = blobManager;
 
 		this.blob = null;
-		this.spawnPlayer(startPos);
-
 		this.lastKnownPos = startPos;
+		this.spawnPlayer(startPos);
 	}
 
-	spawnPlayer(pos = this.lastKnownPos) {
-
+	spawnPlayer(pos) {
+		if (pos === null) {
+			pos = this.lastKnownPos;
+		}
 		if (!this.blob || !this.blob.isAlive) {
 			this.blob = blobManager.initPlayerBlob(pos);
 
@@ -52,7 +53,7 @@ class Player {
 	}
 
 	getMovementVectorTowards(pos) {
-	  return p5.Vector.sub(pos, this.pos);
+		return p5.Vector.sub(pos, this.pos);
 	}
 
 	// ***** Handle observers observing player ***************************
@@ -74,8 +75,8 @@ class Player {
 			} else {
 				console.log(
 					"Observer " + observer.constructor.name + " does not have observerUpdate(message) function");
-			}
-		});
+				}
+			});
+		}
+		// *********************************************************
 	}
-	// *********************************************************
-}

@@ -31,7 +31,7 @@ class ManualInput extends InputModule {
 
 		if (p.mouseIsPressed && !this.mouseIsPressedPrev) {
 			// New input
-			this.onClickStart();
+			this.onClickStart(this.mousePos);
 		}
 
 		this.mouseIsPressedPrev = p.mouseIsPressed;
@@ -48,7 +48,7 @@ class ManualInput extends InputModule {
 
 			if (this.prevTouchesLength === 0) {
 				// New touch input initiated
-				this.onClickStart();
+				this.onClickStart(this.touchInputVector);
 			}
 		}
 
@@ -99,13 +99,14 @@ class ManualInput extends InputModule {
 	handleInputPosition(pos) {
 		this.notify({
 			message: InputEnum.INPUT_AT_SCREEN_POSITION,
-			vector: pos
+			pos: pos
 		});
 	}
 
-	onClickStart() {
+	onClickStart(pos) {
 		this.notify({
-			message: InputEnum.CLICK_STARTED
+			message: InputEnum.CLICK_STARTED,
+			pos: pos
 		});
 	}
 

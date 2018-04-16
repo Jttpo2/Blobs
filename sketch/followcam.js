@@ -54,10 +54,12 @@ class FollowCam {
 	}
 
 	convertToScreenSpace(gameSpaceCoord) {
+		if (!gameSpaceCoord) return null;
 		return p5.Vector.sub(gameSpaceCoord, this.viewZeroInGameSpace);
 	}
 
 	convertToGameSpace(screenSpaceCoord) {
+		if (!screenSpaceCoord) return null;
 		return p5.Vector.add(screenSpaceCoord, this.viewZeroInGameSpace);
 	}
 
@@ -67,11 +69,11 @@ class FollowCam {
 			return;
 		}
 		let desiredPos = entity.pos;
-		let currentPos = this.lookingAtGameSpacePos;	
+		let currentPos = this.lookingAtGameSpacePos;
 		let nextPos = p5.Vector.lerp(
-			currentPos, desiredPos, 
-			this.getSecondsSinceLastFrame() * 
-			this.movementDamping * 
+			currentPos, desiredPos,
+			this.getSecondsSinceLastFrame() *
+			this.movementDamping *
 			desiredPos.dist(currentPos));
 		this.lookingAtGameSpacePos = nextPos;
 	}

@@ -10,9 +10,12 @@ class Brain {
   // Handle updates from input module
   observerUpdate(message) {
     switch (message.message) {
-      case InputEnum.INPUT_AT_SCREEN_POSITION: this.handleInput(message.vector);
+      case InputEnum.INPUT_AT_SCREEN_POSITION: this.handleInput(message.pos);
       break;
-      case InputEnum.CLICK_STARTED: this.player.spawnPlayer();
+      case InputEnum.CLICK_STARTED:
+      this.player.spawnPlayer(
+        this.cam.convertToGameSpace(message.pos)
+      );
       break;
       case InputEnum.KEY_KILL_PLAYER_PRESSED: this.player.killPlayer();
       break;
