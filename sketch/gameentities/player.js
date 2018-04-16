@@ -10,8 +10,7 @@ class Player {
 	spawnPlayer(pos) {
 		if (!this.blob || !this.blob.isAlive) {
 			this.blob = blobManager.initPlayerBlob(pos);
-			// this.blob.setInputModule(this.inputModule);
-
+			
 			this.notify({
 				message: "Player Respawned"
 			});
@@ -54,9 +53,6 @@ class Player {
 
 	// ***** React to input from objects observed by player *************
 	observerUpdate(message) {
-		// if (message.message == InputEnum.INPUT_AT_POSITION) {
-		// 	this.moveTowards(message.vector);
-		// } else
 		if (message.message == "Spawn Player") {
 			this.spawnPlayer(this.pos);
 		} else if (message.message == "Kill Player") {

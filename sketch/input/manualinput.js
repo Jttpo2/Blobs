@@ -2,8 +2,6 @@ class ManualInput extends InputModule {
 	constructor(p) {
 		super(p);
 
-		// this.referenceEntity = referenceEntity;
-
 		this.mouseIsPressedPrev = false;
 		this.keyIsPressedPrev = null;
 		this.prevKey = null;
@@ -28,19 +26,13 @@ class ManualInput extends InputModule {
 	handleMouseInput() {
 		let p = this.p;
 		this.mousePos = p.createVector(p.mouseX, p.mouseY);
-		// if (p.mouseIsPressed) {
-			// Input started this update or continues from previous one
-			this.handleInputPosition(this.mousePos);
-			// this.joystick.feedInput(this.mousePos);
+		// Input started this update or continues from previous one
+		this.handleInputPosition(this.mousePos);
 
-			if (!this.mouseIsPressedPrev) {
-				// New input
-				this.notifySpawnPlayer();
-			}
-		// } else if (this.mouseIsPressedPrev) {
-			// Input stopped since last update
-			// this.joystick.finishInput();
-		// }
+		if (!this.mouseIsPressedPrev) {
+			// New input
+			this.notifySpawnPlayer();
+		}
 
 		this.mouseIsPressedPrev = p.mouseIsPressed;
 	}
@@ -52,32 +44,23 @@ class ManualInput extends InputModule {
 			// TODO: Only concentrates on first touch for now
 			let touch = p.touches[0];
 			this.touchInputVector = p.createVector(touch.x, touch.y);
-			// this.joystick.feedInput(this.touchInputVector);
 			this.handleInputPosition(this.touchInputVector);
 
 			if (this.prevTouchesLength === 0) {
 				// New touch input initiated
 				this.notifySpawnPlayer();
 			}
-		} else {
-			// this.joystick.finishInput();
 		}
-
+		
 		this.prevTouchesLength = p.touches.length;
 	}
 
 	handleInputPosition(pos) {
-		// let movementVector = this.getMovementVector(pos);
-
 		this.notify({
-      message: InputEnum.INPUT_AT_SCREEN_POSITION,
-      vector: pos
-    });
+			message: InputEnum.INPUT_AT_SCREEN_POSITION,
+			vector: pos
+		});
 	}
-
-	// getMovementVector(inputPos) {
-  //   return p5.Vector.sub(inputPos, this.referenceEntity.pos);
-  // }
 
 	handleKeyboardInput() {
 		let p=this.p;
