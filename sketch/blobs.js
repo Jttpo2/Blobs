@@ -43,7 +43,6 @@ let sketch = function (p) {
 
 		followCam = new FollowCam(p, gameboard, blobManager.allBlobs);
 		manualInput = new ManualInput(p, followCam);
-		manualInput.attach(player); // Get player to listen to input
 		followCam.follow(player);
 		brain = new Brain(p, followCam, manualInput, player);
 

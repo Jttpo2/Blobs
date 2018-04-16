@@ -31,7 +31,7 @@ class ManualInput extends InputModule {
 
 		if (p.mouseIsPressed && !this.mouseIsPressedPrev) {
 			// New input
-			this.notifySpawnPlayer();
+			this.onClickStart();
 		}
 
 		this.mouseIsPressedPrev = p.mouseIsPressed;
@@ -48,18 +48,11 @@ class ManualInput extends InputModule {
 
 			if (this.prevTouchesLength === 0) {
 				// New touch input initiated
-				this.notifySpawnPlayer();
+				this.onClickStart();
 			}
 		}
 
 		this.prevTouchesLength = p.touches.length;
-	}
-
-	handleInputPosition(pos) {
-		this.notify({
-			message: InputEnum.INPUT_AT_SCREEN_POSITION,
-			vector: pos
-		});
 	}
 
 	handleKeyboardInput() {
@@ -68,7 +61,7 @@ class ManualInput extends InputModule {
 		if (p.keyIsPressed) {
 			if (key != this.prevKey) {
 				// Respawn on any key
-				this.notifySpawnPlayer();
+				this.onClickStart();
 			}
 
 			let keyCode = p.keyCode;
@@ -78,7 +71,7 @@ class ManualInput extends InputModule {
 				// TODO: Doesn't work
 			} else if (key === this.killKey && this.prevKey != this.killKey) {
 				this.notify({
-					message: "Kill Player"
+					message: InputEnum.KEY_KILL_PLAYER_PRESSED
 				});
 			}
 
@@ -103,15 +96,17 @@ class ManualInput extends InputModule {
 		}
 	}
 
-	observerUpdate(message) {
-		if (message.message === InputEnum.MOVEMENT_VECTOR) {
-			this.notifyMovement(message.vector);
-		}
-	}
-
-	notifySpawnPlayer() {
+	handleInputPosition(pos) {
 		this.notify({
-			message: "Spawn Player"
+			message: InputEnum.INPUT_AT_SCREEN_POSITION,
+			vector: pos
 		});
 	}
+
+	onClickStart() {
+		this.notify({
+			message: InputEnum.CLICK_STARTED
+		});
+	}
+
 }
