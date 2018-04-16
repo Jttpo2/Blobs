@@ -52,11 +52,16 @@ class InputModule {
 	}
 
 	notifyMovement(vector) {
-		this.notify(
-		{
-			message: InputEnum.MOVEMENT_VECTOR, 
+		this.notify({
+			message: InputEnum.MOVEMENT_VECTOR,
 			vector: vector
-		}
-		);
+		});
+	}
+
+	notifyInputAt(pos) {
+		this.notify({
+			message: InputEnum.INPUT_AT_POSITION,
+			vector: pos
+		});
 	}
 }

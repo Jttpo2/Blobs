@@ -1,5 +1,8 @@
 .DS_Store
 
+# 3rd party Libraries
+/libs
+
 # Concatenated js
 concat.js
 concat/style.css
