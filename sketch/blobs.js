@@ -59,9 +59,9 @@ let sketch = function (p) {
 
 		p.detectIfTouchDevice();
 
+		manualInput.update();
 		player.update();
 		blobManager.update();
-		manualInput.update();
 		followCam.update();
 		respawnPopup.run();
 	};
