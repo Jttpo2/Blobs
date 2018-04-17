@@ -23,7 +23,7 @@ class Brain {
   }
 
   handleInput(screenPosition) {
-    player.moveTowards(this.cam.convertToGameSpace(screenPosition));
+    this.player.moveTowards(this.cam.convertToGameSpace(screenPosition));
   }
 
 

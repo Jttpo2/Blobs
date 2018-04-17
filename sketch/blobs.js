@@ -1,26 +1,28 @@
 // blobs.js
 
-let canvasToWindowWidthRatio = 1; //= 5/7;
-let canvasToWindowHeightRatio = 1; //= 5/7;
-
-let desiredFramerate = 60;
-let pausedFramerate = 1;
-
-let blobManager;
-let manualInput;
-let player;
-let followCam;
-let brain;
-let gameboard;
-let gamesize = Constants.GAME_SIZE;
-let backgroundColor;
-let patternColor;
-
-let respawnPopup;
-
-let isTouchDevice = false; // Start with the assumption that we are on desktop
-
 let sketch = function (p) {
+	let canvasToWindowWidthRatio = 1; //= 5/7;
+	let canvasToWindowHeightRatio = 1; //= 5/7;
+
+	let desiredFramerate = 60;
+	let pausedFramerate = 1;
+
+	let blobManager;
+	let manualInput;
+	let player;
+	let followCam;
+	let brain;
+	let gameboard;
+	let gamesize = Constants.GAME_SIZE;
+	let backgroundColor;
+	let patternColor;
+
+	// Start with the assumption that we are on desktop.
+	// Attach to processing object for passing to manual input module.
+	p.isTouchDevice = false;
+
+	let respawnPopup;
+
 	// Makes sure resources are loaded before initiatin sketch
 	p.preload = function() {
 
@@ -81,7 +83,7 @@ let sketch = function (p) {
 	// Must be called every frame
 	p.detectIfTouchDevice = function() {
 		if (p.touches.length > 0) {
-			isTouchDevice = true;
+			p.isTouchDevice = true;
 		}
 	};
 };
