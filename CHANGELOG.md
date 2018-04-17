@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 - Joystick input converted to chasing of the pointer.
 - Respawn at pointer location.
 - Crosshair cursor.
+- General refactoring (encapsulation, arrow functions).
 
 ## [0.13.0] - 2017-05-10
 ### Added
