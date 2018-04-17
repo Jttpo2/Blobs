@@ -1,6 +1,6 @@
 // blobs.js
 
-let sketch = function (p) {
+let sketch = p => {
 	let canvasToWindowWidthRatio = 1; //= 5/7;
 	let canvasToWindowHeightRatio = 1; //= 5/7;
 
@@ -24,11 +24,11 @@ let sketch = function (p) {
 	let respawnPopup;
 
 	// Makes sure resources are loaded before initiatin sketch
-	p.preload = function() {
+	p.preload = () => {
 
 	};
 
-	p.setup = function() {
+	p.setup = () => {
 		let canvas = p.createCanvas(
 			window.innerWidth * canvasToWindowWidthRatio,
 			window.innerHeight * canvasToWindowHeightRatio
@@ -52,7 +52,7 @@ let sketch = function (p) {
 		player.attach(respawnPopup);
 	};
 
-	p.draw = function() {
+	p.draw = () => {
 		if (p.focused) {
 			p.frameRate(desiredFramerate);
 		} else {
@@ -68,20 +68,20 @@ let sketch = function (p) {
 		respawnPopup.run();
 	};
 
-	p.windowResized = function() {
+	p.windowResized = () => {
 		p.resizeCanvas(
 			window.innerWidth * canvasToWindowWidthRatio,
 			window.innerHeight * canvasToWindowHeightRatio);
 		p.onResize();
 	};
 
-	p.onResize = function() {
+	p.onResize = () => {
 		respawnPopup.reposition();
 	};
 
 	// Hack to check whether we're on a touch device.
 	// Must be called every frame
-	p.detectIfTouchDevice = function() {
+	p.detectIfTouchDevice = () => {
 		if (p.touches.length > 0) {
 			p.isTouchDevice = true;
 		}

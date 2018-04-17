@@ -41,7 +41,7 @@ class InputModule {
 	}
 
 	notify(message) {
-		this.observers.forEach(function(observer) {
+		this.observers.forEach((observer) => {
 			if(observer.observerUpdate) {
 				observer.observerUpdate(message);
 			} else {
