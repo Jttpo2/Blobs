@@ -5,6 +5,8 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
+
+## [0.14.0] - 2018-04-17
 ### Changed
 - Joystick input converted to chasing of the pointer.
 - Respawn at pointer location.
