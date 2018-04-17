@@ -16,7 +16,7 @@ let sketch = p => {
 	let colors;
 
 	// Start with the assumption that we are on desktop.
-	// Attach to processing object for passing to manual input module.
+	// Attach to p5.js object for passing to manual input module.
 	p.isTouchDevice = false;
 
 	let respawnPopup;
