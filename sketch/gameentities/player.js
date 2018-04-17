@@ -13,7 +13,7 @@ class Player {
 			pos = this.lastKnownPos;
 		}
 		if (!this.blob || !this.blob.isAlive) {
-			this.blob = blobManager.initPlayerBlob(pos);
+			this.blob = this.blobManager.initPlayerBlob(pos);
 
 			this.notify({
 				message: "Player Respawned"
@@ -23,7 +23,7 @@ class Player {
 
 	killPlayer() {
 		this.lastKnownPos = this.pos;
-		blobManager.kill(this.blob);
+		this.blobManager.kill(this.blob);
 	}
 
 	update() {
@@ -69,7 +69,7 @@ class Player {
 	}
 
 	notify(message) {
-		this.observers.forEach(function(observer) {
+		this.observers.forEach(observer => {
 			if(observer.observerUpdate) {
 				observer.observerUpdate(message);
 			} else {

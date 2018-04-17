@@ -6,14 +6,14 @@ var deploymentFolder = './concat/';
 
 gulp.task('default', ['watch']);
 
-gulp.task('watch', function() {
+gulp.task('watch', () => {
 	livereload.listen();
 	gulp.watch('**/*.css', ['reload', 'copy-css']);
 	gulp.watch('**/*.js', ['concat', 'reload']);
 	gulp.watch('**/*.html', ['reload']);
 });
 
-gulp.task('reload', function() {
+gulp.task('reload', () => {
 	livereload.reload();
 });
 
@@ -39,17 +39,17 @@ var sketchFiles = [
 ];
 
 
-sketchFiles.forEach(function(fileName, index) {
+sketchFiles.forEach((fileName, index) => {
 	sketchFiles[index] = sketchFolder + fileName;
 });
 
-gulp.task('concat', function() {
+gulp.task('concat', () => {
 	gulp.src(sketchFiles)
 	.pipe(concat('concat.js'))
 	.pipe(gulp.dest(deploymentFolder));
 });
 
-gulp.task('copy-css', function() {
+gulp.task('copy-css', () => {
 	gulp.src('style.css')
 	.pipe(gulp.dest(deploymentFolder));
 });

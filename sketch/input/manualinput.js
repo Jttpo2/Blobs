@@ -15,7 +15,7 @@ class ManualInput extends InputModule {
 	}
 
 	update() {
-		if (!isTouchDevice) {
+		if (!this.p.isTouchDevice) {
 			this.handleMouseInput();
 			this.handleKeyboardInput();
 		} else {

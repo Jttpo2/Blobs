@@ -12,13 +12,13 @@ class RespawnPopup {
 		p.colorMode(p.HSB, 255, 255, 255);
 		this.textColor = RespawnPopup.getColorWithRandomHue(
 			p,
-			Constants.BLOB_SATURATION - 20, 
+			Constants.BLOB_SATURATION - 20,
 			Constants.BLOB_BRIGHTNESS -110);
 		this.outlineColor = p.color(
-			p.hue(this.textColor), 
-			p.saturation(this.textColor) -20, 
+			p.hue(this.textColor),
+			p.saturation(this.textColor) -20,
 			p.brightness(this.textColor) -150);
-	}	
+	}
 
 	run() {
 		this.display();
@@ -49,7 +49,7 @@ class RespawnPopup {
 		p.fill(
 			RespawnPopup.getColorWithRandomHue(
 				p,
-				p.saturation(this.textColor), 
+				p.saturation(this.textColor),
 				p.brightness(this.textColor)));
 		p.stroke(this.outlineColor);
 		// p.noStroke();
@@ -69,10 +69,10 @@ class RespawnPopup {
 
 	isOnMobile() {
 		return isTouchDevice;
-	} 
+	}
 
 	isOnDesktop() {
-		return !isTouchDevice;
+		return !this.p.isTouchDevice;
 	}
 
 	observerUpdate(message) {

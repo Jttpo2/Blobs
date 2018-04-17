@@ -43,7 +43,7 @@ class FollowCam {
 		this.render(this.gameBoard);
 
 		let allBlobs = this.allBlobs;
-		allBlobs.forEach(function(rendObj) {
+		allBlobs.forEach(rendObj => {
 			this.render(rendObj);
 		}, this);
 	}

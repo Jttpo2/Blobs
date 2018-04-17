@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
+### Changed
+- Joystick input converted to chasing of the pointer.
+- Respawn at pointer location.
+- Crosshair cursor.
+- General refactoring (encapsulation, arrow functions).
 
 ## [0.13.0] - 2017-05-10
 ### Added
@@ -42,7 +47,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 - File structure refactoring.
 
 ## [0.8.0] - 2016-12-20
-### Added 
+### Added
 - Respawn drones outside screen.
 
 ### Changed
@@ -86,7 +91,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 - Blobs affected by mass. Larger ones appear more sluggish.
 - Manual input through arrow keys.
 - Player blob.
-- Erasing dead blobs from memory. 
+- Erasing dead blobs from memory.
 - Simple FIFO queue implemention.
 
 ## [0.3.0] - 2016-12-18
