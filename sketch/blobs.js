@@ -13,9 +13,7 @@ let sketch = p => {
 	let followCam;
 	let brain;
 	let gameboard;
-	let gamesize = Constants.GAME_SIZE;
-	let backgroundColor;
-	let patternColor;
+	let colors;
 
 	// Start with the assumption that we are on desktop.
 	// Attach to processing object for passing to manual input module.
@@ -36,17 +34,35 @@ let sketch = p => {
 
 		// frameRate(1);
 
-		backgroundColor = p.color(50);
-		patternColor = p.color(100);
-		gameboard = new Gameboard(p, gamesize, gamesize, backgroundColor, patternColor);
-		blobManager = new BlobManager(p, gameboard);
-		let playerStartPos = p.createVector(gameboard.width/2, gameboard.height/2);
-		player = new Player(playerStartPos, blobManager);
-
-		followCam = new FollowCam(p, gameboard, blobManager.allBlobs);
+		colors = {
+			background: p.color(50),
+			pattern: p.color(100)
+		}
+		gameboard = new Gameboard(
+			p,
+			Constants.GAME_SIZE,
+			Constants.GAME_SIZE,
+			colors.background,
+			colors.pattern);
+		blobManager = new BlobManager(
+			p,
+			gameboard);
+		let playerStartPos = p.createVector(
+			gameboard.width/2,
+			gameboard.height/2);
+		player = new Player(
+			playerStartPos,
+			blobManager);
+		followCam = new FollowCam(
+			p,
+			gameboard,
+			blobManager.allBlobs);
 		manualInput = new ManualInput(p);
 		followCam.follow(player);
-		brain = new Brain(p, followCam, manualInput, player);
+		brain = new Brain(p,
+			followCam,
+			manualInput,
+			player);
 
 		respawnPopup = new RespawnPopup(p);
 		player.attach(respawnPopup);
