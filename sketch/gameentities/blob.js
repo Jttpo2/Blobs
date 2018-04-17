@@ -9,13 +9,13 @@ class Blob extends Particle {
 	update() {
 		if (this.isAlive) {
 			super.update();
-			
+
 			if (!this.isManual) {
 				this.inputModule.update();
 			}
 		}
 	}
-	
+
 	displayAt(pos) {
 		let p=this.p;
 		if (this.isAlive) {
@@ -31,48 +31,51 @@ class Blob extends Particle {
 		// Distinguish player blob by
 
 		p.colorMode(p.HSB, 255, 255, 255);
-		// border 
+		// border
 		p.noFill();
 		// stroke(
 		// 	color(
-		// 		hue(this.color), 
-		// 		saturation(this.color), 
+		// 		hue(this.color),
+		// 		saturation(this.color),
 		// 		brightness(this.color) + 25));
 		// ellipse(
-		// 	pos.x, 
-		// 	pos.y, 
+		// 	pos.x,
+		// 	pos.y,
 		// 	size * 2);
 
 		// center spot
 		p.noStroke();
 		p.fill(
 			p.color(
-				p.hue(this.color), 
-				p.saturation(this.color), 
+				p.hue(this.color),
+				p.saturation(this.color),
 				p.brightness(this.color) - 100));
 		p.ellipse(
-			pos.x, 
-			pos.y, 
+			pos.x,
+			pos.y,
 			this.size * (5/6));
 	}
 
 	isCollidingWith(otherBlob) {
 		if (!this.isAlive || !otherBlob.isAlive) {
-			return false;	
-		} 
+			return false;
+		}
 		return p5.Vector.dist(this.pos, otherBlob.pos) < this.size + otherBlob.size;
 	}
 
 	eat(otherBlob) {
 		if (!this.isAlive || !otherBlob.isAlive) {
-			return;	
+			return;
 		}
 		this.size = Blob.calcRadius(this.area + otherBlob.area);
 	}
 
 	die() {
 		this.isAlive = false;
-		this.inputModule.detach(this);
+		if (this.inputModule) {
+			this.inputModule.detach(this);
+			this.inputModule = null;
+		}
 	}
 
 	get area() {

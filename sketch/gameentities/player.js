@@ -1,27 +1,29 @@
 class Player {
-	constructor(startPos, blobManager, inputModule) {
+	constructor(startPos, blobManager) {
 		this.observers = [];
 		this.blobManager = blobManager;
-		inputModule.attach(this); // Listen to input
-		this.inputModule = inputModule;
 
 		this.blob = null;
+		this.lastKnownPos = startPos;
 		this.spawnPlayer(startPos);
 	}
 
 	spawnPlayer(pos) {
+		if (pos === null) {
+			pos = this.lastKnownPos;
+		}
 		if (!this.blob || !this.blob.isAlive) {
-			this.blob = blobManager.initPlayerBlob(pos);
-			this.blob.setInputModule(this.inputModule);
+			this.blob = this.blobManager.initPlayerBlob(pos);
 
 			this.notify({
 				message: "Player Respawned"
-			});			
+			});
 		}
 	}
 
 	killPlayer() {
-		blobManager.kill(this.blob);
+		this.lastKnownPos = this.pos;
+		this.blobManager.kill(this.blob);
 	}
 
 	update() {
@@ -32,9 +34,9 @@ class Player {
 		}
 
 		// Hack to not spawn drones on screen
-		// if (this.isAlive) {
+		if (this.isAlive) {
 			this.blobManager.doNotSpawnNear(this.pos);
-		// } 
+		}
 	}
 
 	get isAlive() {
@@ -45,18 +47,16 @@ class Player {
 		return this.blob.pos;
 	}
 
-	// ***** React to input from objects observed by player *************
+	moveTowards(pos) {
+		let movementVector = this.getMovementVectorTowards(pos);
+		this.blob.moveInDirection(movementVector);
+	}
 
-	observerUpdate(message) {
-		if (message.message == "Spawn Player") {
-			this.spawnPlayer(this.pos);
-		} else if (message.message == "Kill Player") {
-			this.killPlayer();
-		}
+	getMovementVectorTowards(pos) {
+		return p5.Vector.sub(pos, this.pos);
 	}
 
 	// ***** Handle observers observing player ***************************
-
 	attach(observer) {
 		this.observers.push(observer);
 	}
@@ -69,14 +69,14 @@ class Player {
 	}
 
 	notify(message) {
-		this.observers.forEach(function(observer) {
+		this.observers.forEach(observer => {
 			if(observer.observerUpdate) {
 				observer.observerUpdate(message);
 			} else {
 				console.log(
 					"Observer " + observer.constructor.name + " does not have observerUpdate(message) function");
-			}
-		});
+				}
+			});
+		}
+		// *********************************************************
 	}
-	// *********************************************************
-}

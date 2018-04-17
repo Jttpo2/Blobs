@@ -18,7 +18,7 @@ class BlobManager {
 		// Correct place to do this?
 		this.applyFriction(this.playerBlob);
 
-		this.blobs.forEach(function(blob) {
+		this.blobs.forEach(blob => {
 			// this.applyFriction(blob);
 			blob.update();
 			this.repositionOutsideGameboard(blob);
@@ -42,23 +42,23 @@ class BlobManager {
 			pos = this.getRandomSpawnPosition();
 		}
 		let vel = p.createVector(
-			p.randomGaussian(0, 2), 
+			p.randomGaussian(0, 2),
 			p.randomGaussian(0, 2));
 		let size = p.randomGaussian(
 			Constants.DRONE_AVERAGE_SIZE, Constants.DRONE_SIZE_STANDARD_DEVIATION);
 		let col = p.color(
-			Math.random() * 255, 
-			Constants.BLOB_SATURATION, 
+			Math.random() * 255,
+			Constants.BLOB_SATURATION,
 			Constants.BLOB_BRIGHTNESS);
 		let inputModule = new PerlinInput(p);
 		let isManual = false;
 		let blob = new Blob(
 			p,
-			size, 
-			col, 
-			pos, 
+			size,
+			col,
+			pos,
 			vel,
-			Constants.DRONE_MAX_VELOCITY, 
+			Constants.DRONE_MAX_VELOCITY,
 			isManual);
 		blob.setInputModule(inputModule);
 		this.blobs.push(blob);
@@ -70,10 +70,10 @@ class BlobManager {
 		let size = Constants.DRONE_AVERAGE_SIZE + 0.2;
 		let isManual = true;
 		this.playerBlob = new Blob(
-			p, 
-			size, 
-			this.playerBlobColor, 
-			pos, 
+			p,
+			size,
+			this.playerBlobColor,
+			pos,
 			vel,
 			Constants.PLAYER_MAX_VELOCITY,
 			isManual);
@@ -97,12 +97,12 @@ class BlobManager {
 	}
 
 	displayThoseWithinView(topLeft, bottomRight) {
-		
+
 	}
 
 	checkForCollisions() {
-		this.blobs.forEach(function(blob) {
-			this.blobs.forEach(function(otherBlob) {
+		this.blobs.forEach(blob => {
+			this.blobs.forEach(otherBlob => {
 				if (otherBlob == this) {
 					return;
 				}
@@ -145,7 +145,7 @@ class BlobManager {
 	getRandomSpawnPosition() {
 		let p=this.p;
 		return p.createVector(
-			Math.random() * this.gameboard.width, 
+			Math.random() * this.gameboard.width,
 			Math.random() * this.gameboard.height);
 	}
 

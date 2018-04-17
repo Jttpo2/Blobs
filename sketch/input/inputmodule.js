@@ -5,23 +5,23 @@ class InputModule {
 		this.observers = [];
 	}
 
-	static get VECTOR_UP() {
+	get VECTOR_UP() {
 		return this.p.createVector(0, -1);
 	}
 
-	static get VECTOR_DOWN() {
+	get VECTOR_DOWN() {
 		return this.p.createVector(0, 1);
 	}
 
-	static get VECTOR_LEFT() {
+	get VECTOR_LEFT() {
 		return this.p.createVector(-1, 0);
 	}
 
-	static get VECTOR_RIGHT() {
+	get VECTOR_RIGHT() {
 		return this.p.createVector(1, 0);
 	}
 
-	static get VECTOR_ZERO() {
+	get VECTOR_ZERO() {
 		return this.p.createVector(0, 0);
 	}
 
@@ -41,7 +41,7 @@ class InputModule {
 	}
 
 	notify(message) {
-		this.observers.forEach(function(observer) {
+		this.observers.forEach((observer) => {
 			if(observer.observerUpdate) {
 				observer.observerUpdate(message);
 			} else {
@@ -52,11 +52,16 @@ class InputModule {
 	}
 
 	notifyMovement(vector) {
-		this.notify(
-		{
-			message: InputEnum.MOVEMENT_VECTOR, 
+		this.notify({
+			message: InputEnum.MOVEMENT_VECTOR,
 			vector: vector
-		}
-		);
+		});
+	}
+
+	notifyInputAt(pos) {
+		this.notify({
+			message: InputEnum.INPUT_AT_POSITION,
+			vector: pos
+		});
 	}
 }

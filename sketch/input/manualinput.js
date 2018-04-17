@@ -1,8 +1,6 @@
 class ManualInput extends InputModule {
-	constructor(p, joystick) {
+	constructor(p) {
 		super(p);
-		joystick.attach(this);
-		this.joystick = joystick;
 
 		this.mouseIsPressedPrev = false;
 		this.keyIsPressedPrev = null;
@@ -17,28 +15,23 @@ class ManualInput extends InputModule {
 	}
 
 	update() {
-		if (!isTouchDevice) {
+		if (!this.p.isTouchDevice) {
 			this.handleMouseInput();
 			this.handleKeyboardInput();
 		} else {
-			this.handleTouchInput();		
+			this.handleTouchInput();
 		}
-	}	
+	}
 
 	handleMouseInput() {
 		let p = this.p;
 		this.mousePos = p.createVector(p.mouseX, p.mouseY);
-		if (p.mouseIsPressed) {
-			// Input started this update or continues from previous one
-			this.joystick.feedInput(this.mousePos);
-			
-			if (!this.mouseIsPressedPrev) {
-				// New input
-				this.notifySpawnPlayer();
-			}
-		} else if (this.mouseIsPressedPrev) {
-			// Input stopped since last update
-			this.joystick.finishInput();
+		// Input started this update or continues from previous one
+		this.handleInputPosition(this.mousePos);
+
+		if (p.mouseIsPressed && !this.mouseIsPressedPrev) {
+			// New input
+			this.onClickStart(this.mousePos);
 		}
 
 		this.mouseIsPressedPrev = p.mouseIsPressed;
@@ -51,14 +44,12 @@ class ManualInput extends InputModule {
 			// TODO: Only concentrates on first touch for now
 			let touch = p.touches[0];
 			this.touchInputVector = p.createVector(touch.x, touch.y);
-			this.joystick.feedInput(this.touchInputVector);
+			this.handleInputPosition(this.touchInputVector);
 
 			if (this.prevTouchesLength === 0) {
 				// New touch input initiated
-				this.notifySpawnPlayer();
+				this.onClickStart(this.touchInputVector);
 			}
-		} else { 
-			this.joystick.finishInput();
 		}
 
 		this.prevTouchesLength = p.touches.length;
@@ -70,9 +61,9 @@ class ManualInput extends InputModule {
 		if (p.keyIsPressed) {
 			if (key != this.prevKey) {
 				// Respawn on any key
-				this.notifySpawnPlayer();
+				this.onClickStart();
 			}
-			
+
 			let keyCode = p.keyCode;
 
 			if (this.prevKey === this.spawnKey && key === this.spawnkey) {
@@ -80,9 +71,9 @@ class ManualInput extends InputModule {
 				// TODO: Doesn't work
 			} else if (key === this.killKey && this.prevKey != this.killKey) {
 				this.notify({
-					message: "Kill Player"
+					message: InputEnum.KEY_KILL_PLAYER_PRESSED
 				});
-			} 
+			}
 
 			// Legacy keyboard input
 			else if (keyCode === p.UP_ARROW) {
@@ -105,15 +96,18 @@ class ManualInput extends InputModule {
 		}
 	}
 
-	observerUpdate(message) {
-		if (message.message === InputEnum.MOVEMENT_VECTOR) {
-			this.notifyMovement(message.vector);
-		}
-	}
-
-	notifySpawnPlayer() {
+	handleInputPosition(pos) {
 		this.notify({
-			message: "Spawn Player"
+			message: InputEnum.INPUT_AT_SCREEN_POSITION,
+			pos: pos
 		});
 	}
+
+	onClickStart(pos) {
+		this.notify({
+			message: InputEnum.CLICK_STARTED,
+			pos: pos
+		});
+	}
+
 }
