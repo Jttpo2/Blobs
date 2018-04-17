@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Changed
 - Joystick input converted to chasing of the pointer.
 - Respawn at pointer location.
+- Crosshair cursor.
 
 ## [0.13.0] - 2017-05-10
 ### Added
