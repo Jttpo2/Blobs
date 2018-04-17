@@ -3,7 +3,9 @@
   "version": "0.13.0",
   "description": "Simple blob eat blob game using p5.js",
   "main": "index.html",
-  "scripts": {},
+  "scripts": {
+    "localserver" : "http-server ./"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Jttpo2/Blobs.git"
